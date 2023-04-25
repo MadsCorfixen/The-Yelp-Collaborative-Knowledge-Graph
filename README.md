@@ -3,8 +3,7 @@
 
 Link to paper?
 
-:::TODO:::
-- Add meta introduction
+This is the Github repository associated with the paper "The Yelp Collaborative Knowledge Graph⋆". In here, we present the abstract of the paper and provide details on the knowledge graph structure and namespaces, as well on how to obtain the knowledge graph.
 
 ## Abstract
 The Yelp Open Dataset (YOD) is a subset of data about businesses, reviews, and user data from the Yelp reviews website shared in JSON format.
