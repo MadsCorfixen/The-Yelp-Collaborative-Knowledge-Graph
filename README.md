@@ -8,7 +8,7 @@ COPY IN
 ## Knowledge Graph Structure
 In the figure below, the structure of the YCKG is showcased.
 
-<img src="readmeFigs/YelpKGSchema.jpg" width="750" />
+<img src="readmeFigs/YelpKGSchema.pdf" width="750" />
 
 For a complete view of the YCKG will all entities and predicates, we refer to the figure found [here](/Code/Illustrations/KG_structure_diagram.jpg).
 
