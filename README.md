@@ -1,60 +1,36 @@
-# YelpKnowledgeGraph
-**NOTE THAT THIS README IS A WORK IN PROGRESS**
-
-Link to paper?
-
-This is the Github repository associated with the paper "The Yelp Collaborative Knowledge Graph⋆". In here, we present the abstract of the paper and provide details on the knowledge graph structure and namespaces, as well on how to obtain the knowledge graph.
+# The Yelp Collaborative Knowledge Graph
+This is the GitHub repository associated with the paper "The Yelp Collaborative Knowledge Graph". In here, we present the abstract of the paper and provide details on the knowledge graph structure and namespaces, as well on how to obtain the knowledge graph.
 
 ## Abstract
-The Yelp Open Dataset (YOD) is a subset of data about businesses, reviews, and user data from the Yelp reviews website shared in JSON format.
 
-This dataset has been widely used especially to test models for recommendation systems (RS).
-
-Recently, new RS have been developed to process data in the form of Collaborative Knowledge Graphs, where relationships between products and users are modelled along with contextual information, e.g., product categories, businesses locations, and social network information.
-
-This allows for further contextual data to be integrated to provide more intelligent and personalized recommendations.
-
-Unfortunately, to date, most methods have been tested using a poor representation of the YOD as a graph, called improperly the Yelp KG.
-
-Among the various issues, that representation does not follow any standard and fails to link to an up-to-date open domain KG.
-
-In this work, we overcome these issues and construct a Yelp Collaborative Knowledge Graph (the YCKG), along with a related Yelp KG ontology (containing $5$ classes and $116$ properties), and enrich it with the connections to the Schema.org ontology and Wikidata. 
-
-In this way, this resource will support, among others, research in advanced recommendation engines that can finally adopts the full power of an open-domain KG.
-
-Our dataset  has been designed to support $16$ core competency questions, all of which could be answered by the Yelp KG we created. 
-
-We obtain mappings for  $291$ business categories ($23.6\%$), resulting in $94.6\%$ of all businesses having at least one of their categories mapped to a schema.org concept.
-
-We further aligned parts of our Yelp knowledge graph with categories and locations from Wikidata. 
-
-For the categories, a total of $564$ ($39.8\%$) of the categories are mapped with a `sameAs' relation. 
-
-Likewise, for the locations, we correctly link the city of $96.82\%$ of businesses.
-
-The final knowledge graph contains over $244$ million triples (with $144$ distinct predicates) for approximately $72$ million resources, with an average in-degree and out-degree of $3.35$ and $12.20$ respectively.
+COPY IN
 
 ## Knowledge Graph Structure
-:::TODO:::
-- Add meta introduction
+In the figure below, the structure of the YCKG is showcased. 
 
 <img src="readmeFigs/YelpKGSchema.jpg" width="750" />
 
-### Namespaces
-:::TODO:::
-- Add wikidata namespace
-- Check that all namespaces are present
+For a complete view of the YCKG will all entities and predicates, we refer to the figure found [here](/Code/Illustrations/KG_structure_diagram.jpg). 
 
-The following namespaces are used in the Yelp Open Dataset Knowledge Graph:
+### Namespaces
+For creating the YCKG, the following namespaces were created:
+```ttl
+@prefix yelpcat: <https://purl.archive.org/purl/yelp/business_categories#> .
+@prefix yelpont: <https://purl.archive.org/purl/yelp/yelp_ontology#> .
+@prefix yelpent: <https://purl.archive.org/purl/yelp/yelp_entities#> .
+```
+Furthermore, the following existing namespaces were also utilised:
 ```ttl
 @prefix schema: <https://schema.org/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix wiki: <https://www.wikidata.org/entity/> .
+@prefix wiki_prop: <https://www.wikidata.org/wiki/Property:> .
 ```
 
 ## Knowledge Graph Generation
-This section is split into two ways to get the Yelp Open Dataset Knowledge Graph. You can either [download the KG from Zenodo](#zenodo), or [run the source code on your own machine](#directly-from-source). Furthermore, three versions of the KG are available, depending on preference. (1) a "clean" version of the KG that contains none of the mappings to Schema or Wikidata; (2) a version that contains the mappings to Schema, but not to Wikidata; (3) a version that contains both the mappings to Schema and to Wikidata.
+This section is split into two ways to get the YCKG. You can either [download the KG from Zenodo](#zenodo), or [run the source code on your own machine](#directly-from-source). Furthermore, three versions of the KG are available, depending on preference. (1) a "clean" version of the KG that contains none of the mappings to Schema or Wikidata; (2) a version that contains the mappings to Schema, but not to Wikidata; (3) a version that contains both the mappings to Schema and to Wikidata.
 
 ### Requirements
 :::TODO:::
@@ -65,7 +41,15 @@ This section is split into two ways to get the Yelp Open Dataset Knowledge Graph
 [https://zenodo.org/](https://zenodo.org/)
 
 ### Directly from Source
-:::TODO:::
+To run the code yourself and obtain the YCKG, follow the following steps:
+1. Download the [Yelp Open Dataset](https://www.yelp.com/dataset) and put it into a folder of your choice
+2. Download the data from the Github folder [UtilityData]() and also put it into the same folder as YOD.
+3. In the terminal run 
+```python3.10 create_YCKG.py --read_dir 'path/to/data' --write_dir 'path/to/destination' --include_schema True --include_wikidata True```
+The arguments specify the following:
+- ```--read_dir```: The directory in which the data from points 1 and 2 is stored.
+- ```--write_dir```: The directory in which the .nt files should be stored.
+- ```--include_schema```: If True also creates the .nt files to link YCKG to Schema.
+- ```--include_wikidata```: If True also creates the .nt files to link YCKG and Schema to Wikidata.
 
-```command to do X```
 
