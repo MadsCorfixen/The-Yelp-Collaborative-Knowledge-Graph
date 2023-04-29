@@ -1,0 +1,22 @@
+{
+    "business_id" : "1B",
+    "name" : "St Honore Pastries",
+    "attributes": {
+        "RestuarantsDelivery": "False",
+        "BusinessParking": "{'garage': False, 'street': True, 'valet': False}"
+    },
+    "categories": "Restuarants, Food, Bubble Tea, Coffee & Tea, Bakeries"
+}
+
+{   
+    "review_id": "2A",
+    "userid": "U1",
+    "business_id": "1B",  
+    "stars": 4,
+    "useful": 3,
+    "funny": 5, 
+    "cool": 0, 
+    "text": "This businness is ...",
+    "date": "2018-07-07 22:09:11" 
+}
+
