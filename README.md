@@ -43,13 +43,13 @@ This section is split into two ways to get the YCKG. You can either [download th
 ### Directly from Source
 To run the code yourself and obtain the YCKG, follow the following steps:
 1. Download the [Yelp Open Dataset](https://www.yelp.com/dataset) and put it into a folder of your choice
-2. Download the data from the Github folder [UtilityData]() and also put it into the same folder as YOD.
+2. Download the data from the Github folder [UtilityData](UtilityData) and also put it into the same folder as YOD.
 3. In the terminal run 
+
 ```python3.10 create_YCKG.py --read_dir 'path/to/data' --write_dir 'path/to/destination' --include_schema True --include_wikidata True```
+
 The arguments specify the following:
 - ```--read_dir```: The directory in which the data from points 1 and 2 is stored.
 - ```--write_dir```: The directory in which the .nt files should be stored.
 - ```--include_schema```: If True also creates the .nt files to link YCKG to Schema.
 - ```--include_wikidata```: If True also creates the .nt files to link YCKG and Schema to Wikidata.
-
-
