@@ -6,9 +6,9 @@ from rdflib import Namespace, Graph, URIRef, Literal, BNode, XSD
 from rdflib.namespace import RDFS
 from collections import Counter
 
-from UtilityFunctions.dictionary_functions import flatten_dictionary
-from UtilityFunctions.schema_functions import get_schema_predicate, get_schema_type
-from UtilityFunctions.get_iri import get_iri
+from Code.UtilityFunctions.dictionary_functions import flatten_dictionary
+from Code.UtilityFunctions.schema_functions import get_schema_predicate, get_schema_type
+from Code.UtilityFunctions.get_iri import get_iri
 
 schema = Namespace("https://schema.org/")
 skos = Namespace("https://www.w3.org/2004/02/skos/core#")
