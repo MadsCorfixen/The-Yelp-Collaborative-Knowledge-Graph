@@ -144,7 +144,6 @@ def state_query(q_ids):
     return query
     
 
-
 def qid_state(row: str):
     """_summary_
 
@@ -449,8 +448,3 @@ def create_locations_nt(read_dir: str, write_dir: str) -> None:
     with gzip.open(filename=os.path.join(write_dir, "wikidata_location_mappings.nt.gz"),
                    mode="at") as file:
         file.write(G.serialize(format="nt"))
-
-
-if __name__ == "__main__":
-    create_locations_csv(read_dir="/home/ubuntu/vol1/OneDrive/DVML-P7/Data", write_dir="/home/ubuntu/vol1/OneDrive/DVML-P7/Data")
-    create_locations_nt(read_dir="/home/ubuntu/vol1/OneDrive/DVML-P7/Data", write_dir="/home/ubuntu/vol1/virtuoso/import")

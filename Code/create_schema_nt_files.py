@@ -1,14 +1,9 @@
 import gzip
-import sys
 import os
 
 import pandas as pd
 from rdflib import Namespace, Graph, URIRef
 from rdflib.namespace import RDFS
-
-from UtilityFunctions.get_data_path import get_path
-
-sys.path.append(sys.path[0][:sys.path[0].find('DVML-P7') + len('DVML-P7')])
 
 schema = Namespace("https://schema.org/")
 skos = Namespace("https://www.w3.org/2004/02/skos/core#")
@@ -79,20 +74,4 @@ def create_schema_mappings_file(read_dir: str, write_dir: str):
     
     triple_file.write(G.serialize(format='nt'))
     triple_file.close()
-
-
-if __name__ == "__main__":
-
-    myfiles=["/home/ubuntu/vol1/virtuoso/import/schema_hierarchy.nt.gz", 
-             "/home/ubuntu/vol1/virtuoso/import/yelp_schema_mappings.nt.gz"
-             ]
-    for i in myfiles:
-        ## If file exists, delete it ##
-        if os.path.isfile(i):
-            os.remove(i)
-        else:    ## Show an error ##
-            print("Error: %s file not found" % i)
-    
-    create_schema_hierarchy_file(read_dir="/home/ubuntu/vol1/OneDrive/DVML-P7/Data", write_dir="/home/ubuntu/vol1/virtuoso/import")
-    create_schema_mappings_file(read_dir="/home/ubuntu/vol1/OneDrive/DVML-P7/Data", write_dir="/home/ubuntu/vol1/virtuoso/import")
     

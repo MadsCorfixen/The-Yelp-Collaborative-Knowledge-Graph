@@ -75,8 +75,3 @@ def create_schema_wiki_mapping(read_dir: str, write_dir: str) -> None:
 
     triple_file.write(G.serialize(format='nt'))
     triple_file.close()
-
-
-if __name__ == '__main__':
-    create_schema_wiki_mapping(read_dir="/home/ubuntu/vol1/OneDrive/DVML-P7/Data",
-                               write_dir="/home/ubuntu/vol1/virtuoso/import")

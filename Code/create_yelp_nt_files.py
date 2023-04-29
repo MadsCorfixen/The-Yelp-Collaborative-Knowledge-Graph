@@ -1,6 +1,5 @@
 import gzip
 import json
-import sys
 import os
 
 from rdflib import Namespace, Graph, URIRef, Literal, BNode, XSD
@@ -8,11 +7,8 @@ from rdflib.namespace import RDFS
 from collections import Counter
 
 from UtilityFunctions.dictionary_functions import flatten_dictionary
-from UtilityFunctions.get_data_path import get_path
 from UtilityFunctions.schema_functions import get_schema_predicate, get_schema_type
 from UtilityFunctions.get_iri import get_iri
-
-sys.path.append(sys.path[0][:sys.path[0].find('DVML-P7') + len('DVML-P7')])
 
 schema = Namespace("https://schema.org/")
 skos = Namespace("https://www.w3.org/2004/02/skos/core#")
@@ -22,7 +18,7 @@ yelpcat = Namespace("https://purl.archive.org/purl/yelp/business_categories#")
 yelpont = Namespace("https://purl.archive.org/purl/yelp/yelp_ontology#")
 yelpent = Namespace("https://purl.archive.org/purl/yelp/yelp_entities#")
 
-def create_nt_file(file_name: str, rating_threshold: float, read_dir: str, write_dir: str):
+def create_nt_file(file_name: str, read_dir: str, write_dir: str):
     """
     This function takes as input one of three Yelp JSON files (The tip/checkin files are handled in different functions),
     transforms the objects in that file to RDF format, and writes them to a output file.
@@ -30,9 +26,8 @@ def create_nt_file(file_name: str, rating_threshold: float, read_dir: str, write
     :return: a .nt.gz file with Yelp data in RDF format.
     """
     entity_name = file_name[22:-5]  # Either business, user, or review
-    triple_file = gzip.open(filename=f"/home/ubuntu/vol1/virtuoso/import/yelp_{entity_name}.nt.gz", mode="at",
-                            encoding="utf-8")
-    file_path = get_path(file_name)
+    triple_file = gzip.open(filename=os.path.join(write_dir, f"yelp_{entity_name}.nt.gz"), mode="at", encoding="utf-8")
+    file_path = os.path.join(read_dir, file_name)
     
     # Lists for keeping track of errors
     none_triples = []
@@ -183,24 +178,24 @@ def create_nt_file(file_name: str, rating_threshold: float, read_dir: str, write
 
     triple_file.close()
     
-    with open(f"none_list_{entity_name}.txt","wt") as file:
+    with open(os.path.join("Errors", f"none_list_{entity_name}.txt"),"wt") as file:
         for triple in none_triples:
             print(triple, file=file)
 
-    with open(f"error_list_{entity_name}.txt","wt") as file:
+    with open(os.path.join("Errors", f"error_list_{entity_name}.txt"),"wt") as file:
         for triple in error_triples:
             print(triple, file=file)
 
 
-def create_checkin_nt_file():
+def create_checkin_nt_file(read_dir: str, write_dir: str):
     """Creates a .nt file containing the checkin data from the Yelp dataset.
     The checkin json only contains two lines, a business id and a string of dates."""
 
     file_name = "yelp_academic_dataset_checkin.json"
     entity_name = file_name[22:-5]
-    file_path = get_path(file_name)
-    triple_file = gzip.open(filename=f"/home/ubuntu/vol1/virtuoso/import/yelp_{entity_name}.nt.gz", mode="at",
-                            encoding="utf-8")
+
+    triple_file = gzip.open(filename=os.path.join(write_dir, f"yelp_{entity_name}.nt.gz"), mode="at", encoding="utf-8")
+    file_path = os.path.join(read_dir, file_name)
 
     with open(file=file_path, mode="r") as file:
         for line in file:
@@ -257,9 +252,9 @@ def create_tip_nt_file(read_dir: str, write_dir: str):
 
     file_name = "yelp_academic_dataset_tip.json"
     entity_name = file_name[22:-5]
-    file_path = get_path(file_name)
-    triple_file = gzip.open(filename=f"/home/ubuntu/vol1/virtuoso/import/yelp_{entity_name}.nt.gz", mode="at",
-                            encoding="utf-8")
+
+    triple_file = gzip.open(filename=os.path.join(write_dir, f"yelp_{entity_name}.nt.gz"), mode="at", encoding="utf-8")
+    file_path = os.path.join(read_dir, file_name)
 
     with open(file=file_path, mode="r") as file:
         for line in file:
@@ -301,29 +296,4 @@ def create_tip_nt_file(read_dir: str, write_dir: str):
                 print(b_node, _predicate, _object)
 
     triple_file.close()
-
-
-if __name__ == "__main__":
-    myfiles=[
-            "/home/ubuntu/vol1/virtuoso/import/yelp_business.nt.gz", 
-             "/home/ubuntu/vol1/virtuoso/import/yelp_checkin.nt.gz", 
-             "/home/ubuntu/vol1/virtuoso/import/yelp_review.nt.gz", 
-             "/home/ubuntu/vol1/virtuoso/import/yelp_user.nt.gz", 
-             "/home/ubuntu/vol1/virtuoso/import/yelp_tip.nt.gz"
-             ]
-    for i in myfiles:
-        ## If file exists, delete it ##
-        if os.path.isfile(i):
-            os.remove(i)
-        
-    files = [
-        'yelp_academic_dataset_business.json',
-        'yelp_academic_dataset_user.json',
-        'yelp_academic_dataset_review.json'
-    ]
-    for i in files:
-       create_nt_file(file_name=i)
-        
-    create_tip_nt_file()
-    create_checkin_nt_file()
     
