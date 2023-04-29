@@ -6,11 +6,11 @@ This is the GitHub repository associated with the paper "The Yelp Collaborative 
 COPY IN
 
 ## Knowledge Graph Structure
-In the figure below, the structure of the YCKG is showcased. 
+In the figure below, the structure of the YCKG is showcased.
 
 <img src="readmeFigs/YelpKGSchema.jpg" width="750" />
 
-For a complete view of the YCKG will all entities and predicates, we refer to the figure found [here](/Code/Illustrations/KG_structure_diagram.jpg). 
+For a complete view of the YCKG will all entities and predicates, we refer to the figure found [here](/Code/Illustrations/KG_structure_diagram.jpg).
 
 ### Namespaces
 For creating the YCKG, the following namespaces were created:
@@ -43,8 +43,8 @@ This section is split into two ways to get the YCKG. You can either [download th
 ### Directly from Source
 To run the code yourself and obtain the YCKG, follow the following steps:
 1. Download the [Yelp Open Dataset](https://www.yelp.com/dataset) and put it into a folder of your choice
-2. Download the data from the Github folder [UtilityData]() and also put it into the same folder as YOD.
-3. In the terminal run 
+2. Download the data from the Github folder [UtilityData](UtilityData) and also put it into the same folder as YOD.
+3. In the terminal run
 
 ```bash
 python3.10 create_YCKG.py --read_dir 'path/to/data' --write_dir 'path/to/destination' --include_schema True --include_wikidata True
@@ -55,5 +55,3 @@ The arguments specify the following:
 - ```--write_dir```: The directory in which the .nt files should be stored.
 - ```--include_schema```: If True also creates the .nt files to link YCKG to Schema.
 - ```--include_wikidata```: If True also creates the .nt files to link YCKG and Schema to Wikidata.
-
-
