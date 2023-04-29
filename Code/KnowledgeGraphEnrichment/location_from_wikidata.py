@@ -338,10 +338,7 @@ def create_locations_csv(read_dir: str, write_dir: str) -> None:
     df.rename(columns={"city_og": "city", "state_og": "state"},
               inplace=True)
 
-    df.to_csv(path_or_buf=os.path.join(write_dir, 'location_mappings.csv'),
-              index=False)
-    
-    os.system("onedrive --synchronize --single-directory DVML-P7") if "Linux" in os.uname() else None
+    return df 
 
 
 # ## CREATE NT
@@ -390,7 +387,7 @@ def create_locations_nt(read_dir: str, write_dir: str) -> None:
         write_dir (str): _description_
     """
 
-    df = pd.read_csv(filepath_or_buffer=os.path.join(read_dir, "location_mappings.csv"))
+    df = create_locations_csv(read_dir=read_dir, write_dir=write_dir)
     biz = pd.read_json(path_or_buf=os.path.join(read_dir, "yelp_academic_dataset_business.json"),
                        lines=True)
 

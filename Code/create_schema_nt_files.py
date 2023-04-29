@@ -4,6 +4,7 @@ import os
 import pandas as pd
 from rdflib import Namespace, Graph, URIRef
 from rdflib.namespace import RDFS
+from Code.UtilityFunctions.schema_functions import class_hierarchy
 
 schema = Namespace("https://schema.org/")
 skos = Namespace("https://www.w3.org/2004/02/skos/core#")
@@ -22,8 +23,8 @@ def create_schema_hierarchy_file(read_dir: str, write_dir: str):
                             mode="at",
                             encoding="utf-8")
     
-    class_hierarchies = pd.read_csv(os.path.join(read_dir, "class_hierarchy.csv"))
-
+    class_hierarchies = class_hierarchy(read_dir=read_dir)
+    
     G = Graph()  
     for idx, row in class_hierarchies.iterrows():  # Adds type hierarchies to the graph
         G.add(triple=(URIRef(Namespace(row['type'])),

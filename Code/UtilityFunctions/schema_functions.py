@@ -1,9 +1,8 @@
-import sys
+import os
 import pandas as pd
 from networkx import DiGraph
 from networkx.algorithms.traversal.depth_first_search import dfs_tree
 from rdflib import Namespace, XSD
-sys.path.append(sys.path[0][:sys.path[0].find('DVML-P7') + len('DVML-P7')])
 
 from Code.UtilityFunctions.get_data_path import get_path
 from Code.UtilityFunctions.string_functions import string_is_float
@@ -110,13 +109,20 @@ def get_schema_type(entity: str):
             print(f"Unknown schema type for entity: {entity}")
 
 
-def class_hierarchy(dictionary):
+def class_hierarchy(read_dir: str):
     """
     This function is used to create the hierarchy only for the relevant schema.org types for this ontology.
-    :param dictionary: Input here is the category to schema type mapping dictionary returned from get_class_mappings().
     :return: a dataframe with schema type and its supertype(s).
     """
-    schema_df = pd.read_csv("Code/UtilityData/schemaorg-current-https-types.csv")[["id", "subTypeOf"]]
+
+    class_mappings_manual_df = pd.read_csv(os.path.join(read_dir, 'class_mappings_manual.csv'))
+    class_mappings_manual_df['SchemaType'] = class_mappings_manual_df.SchemaType.str.split(",")
+    class_mappings_manual_df = class_mappings_manual_df.explode('SchemaType')
+    class_mapping_dict = pd.Series(class_mappings_manual_df.SchemaType.values,index=class_mappings_manual_df.YelpCategory).to_dict()
+    for key, value in class_mapping_dict.items():
+        class_mapping_dict[key] = value.replace("'", "").replace("[", "").replace("]", "").replace(" ", "")
+
+    schema_df = pd.read_csv(os.path.join(read_dir, 'schemaorg-current-https-types.csv'))[["id", "subTypeOf"]]
     schema_df = schema_df.apply(
         lambda x: x.str.split(', ').explode())  # Some types have multiple supertypes, so we explode those rows.
 
@@ -126,7 +132,7 @@ def class_hierarchy(dictionary):
     graph.add_edges_from(list(zip(schema_df["id"], schema_df["subTypeOf"])))  # Here we add EVERY row to the graph
 
     # We do a depth first search on the constructed graph starting at each type in the input dictionary.
-    for _class in dictionary.values():
+    for _class in class_mapping_dict.values():
         supertypes = dfs_tree(graph, "https://schema.org/" + _class)
         edges = supertypes.edges()  # edges is a list of lists
         for edge in edges:
@@ -137,15 +143,3 @@ def class_hierarchy(dictionary):
     supertypes_df.dropna(inplace=True)
 
     return supertypes_df
-
-if __name__ == "__main__":
-    class_mappings_manual_df = pd.read_csv("Code/UtilityData/class_mappings_manual.csv")
-    class_mappings_manual_df['SchemaType'] = class_mappings_manual_df.SchemaType.str.split(",")
-    class_mappings_manual_df = class_mappings_manual_df.explode('SchemaType')
-    class_mapping_dict = pd.Series(class_mappings_manual_df.SchemaType.values,index=class_mappings_manual_df.YelpCategory).to_dict()
-    for key, value in class_mapping_dict.items():
-        class_mapping_dict[key] = value.replace("'", "").replace("[", "").replace("]", "").replace(" ", "")
-    
-    class_hierarchy_df = class_hierarchy(class_mapping_dict)
-    class_hierarchy_df.to_csv(path_or_buf="Code/UtilityData/class_hierarchy.csv", index=False)
-
