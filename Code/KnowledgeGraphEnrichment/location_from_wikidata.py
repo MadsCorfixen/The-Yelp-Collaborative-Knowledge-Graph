@@ -438,7 +438,6 @@ def create_locations_nt(read_dir: str, write_dir: str) -> None:
         elif row.state_qid:
             G.add((URIRef(yelpont[row.business_id]), URIRef(schema['location']), URIRef(wiki[row.state_qid])))
             G.add((URIRef(wiki[row.state_qid]), URIRef(RDFS.label), Literal(row.state_label, datatype=XSD.string)))
-            G.add((URIRef(wiki[row.state_id]), URIRef(instance_of_predicate), URIRef(wiki[row.state_id])))
             if row.country_qid:
                 G += add_to_graph(row, "state", "country", "Q6256")  # to state
 
