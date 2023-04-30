@@ -18,6 +18,7 @@ def run_query(query, as_dataframe=False, do_print=False, include_types=False):
     PREFIX yelpont: <https://purl.archive.org/purl/yelp/yelp_ontology#>
     PREFIX yelpent: <https://purl.archive.org/purl/yelp/yelp_entities#>
     PREFIX wd: <https://www.wikidata.org/entity/>
+    PREFIX skos: <https://www.w3.org/2004/02/skos/core#>
     """
     
     endpoint.setQuery(PREFIX+query)
