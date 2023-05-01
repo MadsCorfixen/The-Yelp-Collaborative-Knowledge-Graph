@@ -72,7 +72,7 @@
   
 <https://raw.githubusercontent.com/christiannielsen98/DVML-P7/main/YelpOntology/yelp_ontology.ttl#BusinessObjectProperty>
   rdfs:subPropertyOf owl:ObjectTypeProperty ;
-  rdfs:comment "Used to ."@en ;
+  rdfs:comment "Used to define predicates from Yelp <Business> to other objects such as the various Yelp <Services>."@en ;
   
 ##############################################
 
