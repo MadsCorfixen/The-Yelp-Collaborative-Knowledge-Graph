@@ -44,6 +44,8 @@ def create_schema_wiki_mapping(read_dir: str, write_dir: str) -> None:
     wikidata_mapping = wikidata_mapping.drop_duplicates()
     wikidata_mapping = wikidata_mapping.reset_index(drop=True)
 
+    mapping_dataframe = pd.merge(left=wikidata_mapping, right=schema_mapping, how='left', on='SchemaType')  # Merge the Schema-Wikidata mappings with the Schema-Yelp mappings
+
     # Create RDF file
     yelpont = Namespace("https://purl.archive.org/purl/yelp/yelp_ontology#")
     triple_file = os.path.join(write_dir, "schema_wiki_mappings.nt.gz")  # Compress into .gz format to save space on disk
@@ -55,11 +57,11 @@ def create_schema_wiki_mapping(read_dir: str, write_dir: str) -> None:
 
     # Initialise empty graph and populate with Schema-Wikidata mappings
     G = Graph()
-    for idx, row in wikidata_mapping.iterrows():
+    for idx, row in mapping_dataframe.iterrows():
         # Add (spo) with mapping
         G.add(triple=(
-            URIRef(row.SchemaType),                 # Subject
-            URIRef("https://schema.org/sameAs"),    # Predicate
+            URIRef(row.YelpCategory),                 # Subject
+            URIRef(skos + "relatedMatch"),          # Predicate
             URIRef(row.QID)                         # Object
         ))
 
@@ -79,3 +81,8 @@ def create_schema_wiki_mapping(read_dir: str, write_dir: str) -> None:
 
     triple_file.write(G.serialize(format='nt'))
     triple_file.close()
+
+
+if __name__ == '__main__':
+    create_schema_wiki_mapping(read_dir="/home/ubuntu/vol1/OneDrive/DVML-P7/Data", write_dir="/home/ubuntu/vol1/test_files")
+
