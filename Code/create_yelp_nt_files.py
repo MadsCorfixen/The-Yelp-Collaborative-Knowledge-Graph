@@ -178,11 +178,11 @@ def create_nt_file(file_name: str, read_dir: str, write_dir: str):
 
     triple_file.close()
     
-    with open(os.path.join("Errors", f"none_list_{entity_name}.txt"),"wt") as file:
+    with open(os.path.join("Code", "Errors", f"none_list_{entity_name}.txt"),"wt") as file:
         for triple in none_triples:
             print(triple, file=file)
 
-    with open(os.path.join("Errors", f"error_list_{entity_name}.txt"),"wt") as file:
+    with open(os.path.join("Code", "Errors", f"error_list_{entity_name}.txt"),"wt") as file:
         for triple in error_triples:
             print(triple, file=file)
 

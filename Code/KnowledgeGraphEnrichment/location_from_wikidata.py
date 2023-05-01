@@ -289,7 +289,7 @@ def create_locations_csv(read_dir: str, write_dir: str) -> None:
         write_dir (str): _description_
     """
 
-    biz = pd.read_json(filepath_or_buffer=os.path.join(read_dir, "yelp_academic_dataset_business.json"),
+    biz = pd.read_json(path_or_buf=os.path.join(read_dir, "yelp_academic_dataset_business.json"),
                        lines=True)
 
     biz["city_og"] = biz["city"]
@@ -438,7 +438,6 @@ def create_locations_nt(read_dir: str, write_dir: str) -> None:
         elif row.state_qid:
             G.add((URIRef(yelpont[row.business_id]), URIRef(schema['location']), URIRef(wiki[row.state_qid])))
             G.add((URIRef(wiki[row.state_qid]), URIRef(RDFS.label), Literal(row.state_label, datatype=XSD.string)))
-            G.add((URIRef(wiki[row.state_id]), URIRef(instance_of_predicate), URIRef(wiki[row.state_id])))
             if row.country_qid:
                 G += add_to_graph(row, "state", "country", "Q6256")  # to state
 
