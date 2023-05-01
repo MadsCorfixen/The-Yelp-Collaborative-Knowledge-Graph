@@ -1,6 +1,7 @@
 {
     "business_id" : "1B",
     "name" : "St Honore Pastries",
+    "stars" : 3.0,
     "attributes": {
         "RestuarantsDelivery": "False",
         "BusinessParking": "{'garage': False, 'street': True, 'valet': False}"
@@ -12,7 +13,7 @@
     "review_id": "2A",
     "userid": "U1",
     "business_id": "1B",  
-    "stars": 4,
+    "stars": 4.0,
     "useful": 3,
     "funny": 5, 
     "cool": 0, 

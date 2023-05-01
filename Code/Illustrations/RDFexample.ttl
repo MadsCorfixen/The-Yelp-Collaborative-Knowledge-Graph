@@ -2,26 +2,31 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix yelpent: <https://purl.archive.org/purl/yelp/yelp_entities#> .
 @prefix yelpont: <https://purl.archive.org/purl/yelp/yelp_ontology#>
+@prefix yelpcat: <https://purl.archive.org/purl/yelp/business_categories#>
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 
 yelpent:business_id/1B
     rdfs:Class schema:LocalBusiness ;
     schema:name "St Honore Pastries"^^xsd:string ;
+    schema:aggregateRating 3^^xsd:decimal ;
     yelpont:RestaurantsDelivery "False"^^xsd:boolean ;
-    yelpont:hasBusinessParking <b_node_id_1>
-    schema:category "Restaurant"^^xsd:string, "Food"^^xsd:string, "Bubble Tea"^^xsd:string,
-        "Coffee & Tea"^^xsd:string, "Bakeries"^^xsd:string .
+    yelpont:hasBusinessParking <b_node_id_1> ;
+    schema:category yelpcat:Restaurant, yelpcat:Food, yelpcat:Bubble_Tea,
+        yelpcat:Coffee_&_Tea, yelpcat:Bakeries .
+
+<b_node_id_1> 
+    rdfs:Class schema:ParkingFacility ;
+    yelpont:hasGarage "False"^^xsd:boolean ;
+    yelpont:hasStreet "True"^^xsd:boolean ;
+    yelpont:hasValet "False"^^xsd:boolean .
 
 yelpent:review_id/2A
     rdfs:Class schema:UserReview ;
-    schema:author <yelpent:U1> ;
+    schema:author yelpent:U1 ;
     schema:url <https://www.yelp.com/biz/1B/?hrid=2A> ;
-    schema:aggregateRating 4^^xsd:integer ;
+    schema:aggregateRating 4^^xsd:decimal ;
     schema:dateCreated "2018-07-07 22:09:11"^^xsd:dateTime ;
     schema:description "This businness is ..."^^xsd:string ;
     yelpont:cool 0^^xsd:integer ;
     yelpont:funny 5^^xsd:integer ;
     yelpont:useful 3^^xsd:integer .
-
-
-
