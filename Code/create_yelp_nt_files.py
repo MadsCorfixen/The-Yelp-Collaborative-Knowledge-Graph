@@ -61,7 +61,7 @@ def create_nt_file(file_name: str, read_dir: str, write_dir: str):
                 subject_class = get_schema_type(entity_name)
 
                 G.add(triple=(URIRef(subject),
-                            RDFS.Class,
+                            RDFS.Type,
                             URIRef(subject_class)))     
 
                 # Creates a triple pointing to the subjects corresponding URL (Best practice).
@@ -88,17 +88,17 @@ def create_nt_file(file_name: str, read_dir: str, write_dir: str):
                         del line['categories']  # No longer need this key/value pair.
                         
                         for category in categories:
-                            category = category.replace(' ', '_')  # Need to replace whitespace as we use it as URI
+                            category = category.replace(' ', '_').replace("&", "_").replace("/", "_")  # Need to replace special characters as we use it as URI
                             G.add(triple=(
                                 URIRef(subject),
-                                URIRef(schema + "category"),
+                                URIRef(schema + "keywords"),
                                 URIRef(yelpcat + category)
-                                ))                            
+                                ))
 
                             if category not in category_cache:
                                 G.add(triple=(
                                     URIRef(yelpcat + category),
-                                    RDFS.Class,
+                                    RDFS.Type,
                                     URIRef(yelpont + "YelpCategory")
                                     ))
                                 
@@ -125,7 +125,7 @@ def create_nt_file(file_name: str, read_dir: str, write_dir: str):
                         blanknode_class = get_schema_type(_predicate)
 
                         G.add(triple=(URIRef(b_node),
-                                      RDFS.Class,
+                                      RDFS.Type,
                                       URIRef(blanknode_class)))
 
                         for sub_predicate, sub_object in _object.items():
@@ -224,8 +224,8 @@ def create_checkin_nt_file(read_dir: str, write_dir: str):
                                   URIRef(b_node)))
                     
                     G.add(triple=(URIRef(b_node),
-                                  RDFS.Class,
-                                  URIRef(schema + "CheckInAction")))
+                                  RDFS.Type,
+                                  URIRef(schema + "ArriveAction")))
                     
                     G.add(triple=(URIRef(b_node),
                                   URIRef(schema + 'checkinTime'),
@@ -272,7 +272,7 @@ def create_tip_nt_file(read_dir: str, write_dir: str):
 
                 # Assigns a RDFS Class to the blank node.
                 G.add(triple=(URIRef(b_node),
-                              RDFS.Class,
+                              RDFS.Type,
                               URIRef(yelpont + 'Tip')))
 
                 for _predicate, _object in line.items():

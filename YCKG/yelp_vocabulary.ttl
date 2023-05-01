@@ -1,6 +1,7 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix dc: <http://purl.org/dc/terms/> .
 @prefix ns0: <http://purl.org/vocab/vann/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix cc: <http://creativecommons.org/ns#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
@@ -9,6 +10,7 @@
 @prefix yelpont: <https://purl.archive.org/purl/yelp_ontology#> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix wd: <https://www.wikidata.org/entity/> .
 
 ##############################################
 
@@ -52,19 +54,25 @@
   rdfs:label "Tip"@en ;
   
 <https://raw.githubusercontent.com/christiannielsen98/DVML-P7/main/YelpOntology/yelp_ontology.ttl#SchemaCategory>
-  a owl:Class ;
+  rdf:type skos:Collection ;
   rdfs:comment "A Schema Category is a class assigned to objects which originates from the Schema ontology."@en ;
   rdfs:label "Schema Category"@en ;
   
 <https://raw.githubusercontent.com/christiannielsen98/DVML-P7/main/YelpOntology/yelp_ontology.ttl#YelpCategory>
   a owl:Class ;
+  rdfs:subClassOf schema:DefinedTerm ;
   rdfs:comment "A Yelp Category is a class assigned to the objects in the Yelp ontology."@en ;
   rdfs:label "Yelp Category"@en ;
   
 <https://raw.githubusercontent.com/christiannielsen98/DVML-P7/main/YelpOntology/yelp_ontology.ttl#WikidataCategory>
-  a owl:Class ;
+  rdf:type skos:Collection ;
+  rdfs:subClassOf wd:Q35120 ;
   rdfs:comment "A Wikidata Category is a class assigned to the objects which origniates from the Wikidata ontology."@en ;
   rdfs:label "Wikidata Category"@en ;
+  
+<https://raw.githubusercontent.com/christiannielsen98/DVML-P7/main/YelpOntology/yelp_ontology.ttl#BusinessObjectProperty>
+  rdfs:subPropertyOf owl:ObjectTypeProperty ;
+  rdfs:comment "Used to ."@en ;
   
 ##############################################
 
@@ -311,28 +319,28 @@
    rdfs:range xsd:String . 
 
 <https://purl.archive.org/purl/yelp_ontology#hasAmbience> 
-   a owl:ObjectProperty, owl:FunctionalProperty ; 
+   a yelpont:BusinessObjectProperty, owl:FunctionalProperty ; 
    rdfs:comment "Specifies the ambience type of a <Business>."@en ; 
    rdfs:domain schema:LocalBusiness; 
    rdfs:label "hasAmbience"@en ; 
    rdfs:range schema:LocationFeatureSpecification . 
 
 <https://purl.archive.org/purl/yelp_ontology#hasBestNights> 
-   a owl:ObjectProperty, owl:FunctionalProperty ; 
+   a yelpont:BusinessObjectProperty, owl:FunctionalProperty ; 
    rdfs:comment "Specifies if a <Business> has some nights which are better than others."@en ; 
    rdfs:domain schema:LocalBusiness; 
    rdfs:label "hasBestnights"@en ; 
    rdfs:range schema:LocationFeatureSpecification . 
 
 <https://purl.archive.org/purl/yelp_ontology#hasBusinessParking> 
-   a owl:ObjectProperty, owl:FunctionalProperty ; 
+   a yelpont:BusinessObjectProperty, owl:FunctionalProperty ; 
    rdfs:comment "Specifies what parking options a <Business> offers."@en ; 
    rdfs:domain schema:LocalBusiness ; 
    rdfs:label "hasBusinessparking"@en ; 
    rdfs:range schema:ParkingFacility . 
 
 <https://purl.archive.org/purl/yelp_ontology#hasDietaryRestrictions> 
-   a owl:ObjectProperty, owl:FunctionalProperty; 
+   a yelpont:BusinessObjectProperty, owl:FunctionalProperty; 
    rdfs:comment "Specifies what dietary restrictions a <Business> accomodates."@en ; 
    rdfs:domain schema:LocalBusiness; 
    rdfs:label "hasDietaryrestrictions"@en ; 
@@ -346,21 +354,21 @@
    rdfs:range xsd:String . 
 
 <https://purl.archive.org/purl/yelp_ontology#hasGoodForMeal> 
-   a owl:ObjectProperty, owl:FunctionalProperty ; 
+   a yelpont:BusinessObjectProperty, owl:FunctionalProperty ; 
    rdfs:comment "Specifies what meals a <Business> excels in."@en ; 
    rdfs:domain schema:LocalBusiness ; 
    rdfs:label "hasGoodformeal"@en ; 
    rdfs:range schema:FoodService . 
 
 <https://purl.archive.org/purl/yelp_ontology#hasHairSpecializesIn> 
-   a owl:ObjectProperty, owl:FunctionalProperty ; 
+   a yelpont:BusinessObjectProperty, owl:FunctionalProperty ; 
    rdfs:comment "Specifies what hair types a <Business> specialises in."@en ; 
    rdfs:domain schema:LocalBusiness ; 
    rdfs:label "hasHairspecializesin"@en ; 
    rdfs:range schema:LocationFeatureSpecification . 
 
 <https://purl.archive.org/purl/yelp_ontology#hasHours> 
-   a owl:ObjectProperty, owl:FunctionalProperty ; 
+   a yelpont:BusinessObjectProperty, owl:FunctionalProperty ; 
    rdfs:comment "Specifies what hours a <Business> is open."@en ; 
    rdfs:domain schema:LocalBusiness ; 
    rdfs:label "hasHours"@en ; 
@@ -374,7 +382,7 @@
    rdfs:range xsd:String . 
 
 <https://purl.archive.org/purl/yelp_ontology#hasMusic> 
-   a owl:ObjectProperty, owl:FunctionalProperty ; 
+   a yelpont:BusinessObjectProperty, owl:FunctionalProperty ; 
    rdfs:comment "Specifies if a <Business> has certain types of music."@en ; 
    rdfs:domain schema:LocalBusiness; 
    rdfs:label "hasMusic"@en ; 

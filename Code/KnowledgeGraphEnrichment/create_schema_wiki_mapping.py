@@ -1,3 +1,6 @@
+import sys
+sys.path.append(sys.path[0][:sys.path[0].find('YelpOpenDatasetKnowledgeGraph') + len('YelpOpenDatasetKnowledgeGraph')])
+
 import os
 import gzip
 
@@ -6,6 +9,7 @@ from rdflib import Graph, URIRef, Literal, XSD, RDFS, Namespace
 
 from Code.UtilityFunctions.wikidata_functions import wikidata_query, category_query
 
+skos = Namespace("https://www.w3.org/2004/02/skos/core#")
 
 def create_schema_wiki_mapping(read_dir: str, write_dir: str) -> None:
     """This function creates a GZIP-compressed .nt file with the Schema-Wikidata mappings.
@@ -68,9 +72,9 @@ def create_schema_wiki_mapping(read_dir: str, write_dir: str) -> None:
 
         # Add (spo) specifying the class of the QID as stemming from Wikidata
         G.add(triple=(
-            URIRef(row.QID),
-            RDFS.Class,
-            URIRef(yelpont + "WikidataCategory")
+            URIRef(yelpont + "WikidataCategory"),
+            URIRef(skos + "Member"),
+            URIRef(row.QID)
         ))
 
     triple_file.write(G.serialize(format='nt'))

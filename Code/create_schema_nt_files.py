@@ -63,14 +63,16 @@ def create_schema_mappings_file(read_dir: str, write_dir: str):
     for idx, row in schema_mapping.iterrows():
         G.add(triple=(
             URIRef(row.YelpCategory),
-            URIRef(skos + "narrowMatch") if "&" in row.YelpCategory or "/" in row.YelpCategory else URIRef(skos + "closeMatch"),   
+            URIRef(skos + "relatedMatch"),   
             URIRef(row.SchemaType)                         
         ))
 
         if row.SchemaType not in category_mappings_cache:
-            G.add(triple=(URIRef(row.SchemaType),
-                            RDFS.Class,
-                            URIRef(yelpont + "SchemaCategory")))
+            G.add(triple=(
+                URIRef(yelpont + "SchemaCategory"),
+                URIRef(skos + "Member"),
+                URIRef(row.SchemaType)
+            ))
             category_mappings_cache.add(row.SchemaType)
     
     triple_file.write(G.serialize(format='nt'))
