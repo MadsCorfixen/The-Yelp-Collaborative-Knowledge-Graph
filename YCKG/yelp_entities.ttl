@@ -1,1 +1,11 @@
 
+<PURL LINK to entities>
+  a dcat:Dataset ;
+  dct:title "The Yelp Collaborative Knowledge Graph"@en ;
+  dct:description "The YCKG is the dataset associated with 'The Yelp Collaborative Knowledge Graph' paper. It fully models the Yelp Open Dataset."@en ;
+  dct:creator "Mads Corfixen", "Thomas Heede", "Christian Fillip Pinderup Nielsen", "Magnus Olesen" ;
+  dct:subject "Knowledge Graphs", "Recommender System", "Open Data", "Reviews" ;
+  dct:language "en" ;
+  dct:issued "2023-05-08"^^xsd:date ;
+  dct:modified "2023-05-08"^^xsd:date ;
+  dcat:downloadURL "Zenodo LINK" .
