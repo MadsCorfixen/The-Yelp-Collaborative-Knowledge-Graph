@@ -1,6 +1,9 @@
 {
     "business_id" : "1B",
     "name" : "St Honore Pastries",
+    "city"; "Santa Barbara",
+    "latitude": 38.551126,
+    "longtitude": -90.335695,
     "stars" : 3.0,
     "attributes": {
         "RestuarantsDelivery": "False",

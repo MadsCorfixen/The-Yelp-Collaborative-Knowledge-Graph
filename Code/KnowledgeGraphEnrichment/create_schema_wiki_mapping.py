@@ -10,8 +10,10 @@ from rdflib import Graph, URIRef, Literal, XSD, RDFS, Namespace
 from Code.UtilityFunctions.wikidata_functions import wikidata_query, category_query
 
 skos = Namespace("https://www.w3.org/2004/02/skos/core#")
+yelpcat = Namespace("https://purl.archive.org/purl/yelp/categories#")
+yelpont = Namespace("https://purl.archive.org/purl/yelp/vocabulary#")
 
-def create_schema_wiki_mapping(read_dir: str, write_dir: str) -> None:
+def create_yelp_wiki_mapping(read_dir: str, write_dir: str) -> None:
     """This function creates a GZIP-compressed .nt file with the Schema-Wikidata mappings.
 
     Args:
@@ -47,20 +49,19 @@ def create_schema_wiki_mapping(read_dir: str, write_dir: str) -> None:
     mapping_dataframe = pd.merge(left=wikidata_mapping, right=schema_mapping, how='left', on='SchemaType')  # Merge the Schema-Wikidata mappings with the Schema-Yelp mappings
 
     # Create RDF file
-    yelpont = Namespace("https://purl.archive.org/purl/yelp/yelp_ontology#")
-    triple_file = os.path.join(write_dir, "schema_wiki_mappings.nt.gz")  # Compress into .gz format to save space on disk
+    triple_file = os.path.join(write_dir, "yelp_wiki_mappings.nt.gz")  # Compress into .gz format to save space on disk
 
     if os.path.isfile(triple_file):  # Remove file if it already exists
         os.remove(triple_file)
 
     triple_file = gzip.open(filename=triple_file, mode="at", encoding="utf-8")
 
-    # Initialise empty graph and populate with Schema-Wikidata mappings
+    # Initialise empty graph and populate with Yelp-Wikidata mappings
     G = Graph()
     for idx, row in mapping_dataframe.iterrows():
         # Add (spo) with mapping
         G.add(triple=(
-            URIRef(row.YelpCategory),                 # Subject
+            URIRef(yelpcat + row.YelpCategory.replace(' ', '_').replace("&", "_").replace("/", "_")), # Subject
             URIRef(skos + "relatedMatch"),          # Predicate
             URIRef(row.QID)                         # Object
         ))
@@ -81,8 +82,3 @@ def create_schema_wiki_mapping(read_dir: str, write_dir: str) -> None:
 
     triple_file.write(G.serialize(format='nt'))
     triple_file.close()
-
-
-if __name__ == '__main__':
-    create_schema_wiki_mapping(read_dir="/home/ubuntu/vol1/OneDrive/DVML-P7/Data", write_dir="/home/ubuntu/vol1/test_files")
-

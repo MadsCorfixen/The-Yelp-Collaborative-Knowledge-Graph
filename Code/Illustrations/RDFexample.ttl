@@ -8,13 +8,16 @@
 yelpent:business_id/1B
     rdfs:Class schema:LocalBusiness ;
     schema:name "St Honore Pastries"^^xsd:string ;
+    yelpont:locatedInCity "Santa Barbara"^^xsd:string ;
+    schema:latitude 38.551126^^xsd:decimal ;
+    schema:longitude -90.335695^^xsd:decimal ;
     schema:aggregateRating 3^^xsd:decimal ;
     yelpont:RestaurantsDelivery "False"^^xsd:boolean ;
-    yelpont:hasBusinessParking <b_node_id_1> ;
+    yelpont:hasBusinessParking _:bnode_id1 ;
     schema:category yelpcat:Restaurant, yelpcat:Food, yelpcat:Bubble_Tea,
         yelpcat:Coffee_&_Tea, yelpcat:Bakeries .
 
-<b_node_id_1> 
+_:bnode_id1
     rdfs:Class schema:ParkingFacility ;
     yelpont:hasGarage "False"^^xsd:boolean ;
     yelpont:hasStreet "True"^^xsd:boolean ;

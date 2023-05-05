@@ -9,12 +9,12 @@ from Code.UtilityFunctions.string_functions import string_is_float
 
 schema = Namespace("https://schema.org/")
 example = Namespace("https://example.org/")
-yelpont = Namespace("https://purl.archive.org/purl/yelp/yelp_ontology#")
+yelpont = Namespace("https://purl.archive.org/purl/yelp/vocabulary#")
 
 def get_schema_predicate(predicate, obj=None, file=None):
     """
     This match function gets as input keys and values from the Yelp JSON files and tries to map the keys to proper
-    schema.org predicates and proper XSD datatypes. If no schema.org predicate can be found, create an example.org
+    schema.org predicates and proper XSD datatypes. If no schema.org predicate can be found, create an yelpont
     predicate based on the input "predicate" and with "obj" datatype as XSD datatype.
     :param predicate: A key from the JSON file
     :param obj: The value pair from the JSON file
@@ -38,13 +38,8 @@ def get_schema_predicate(predicate, obj=None, file=None):
             return schema + "reviewCount", XSD.integer
         case "is_open":
             return schema + "publicAccess", XSD.string
-        case "categories":
-            return schema + "category", XSD.string
         case "date":
-            if file == "yelp_academic_dataset_checkin.json":
-                return schema + "checkinTime", XSD.dateTime 
-            else:
-                return schema + "dateCreated", XSD.dateTime
+            return schema + "dateCreated", XSD.dateTime
         case "friends":
             return schema + "knows", XSD.string
         case "yelping_since":
@@ -85,7 +80,7 @@ def get_schema_predicate(predicate, obj=None, file=None):
 
 def get_schema_type(entity: str):
     """
-    This function assigns a schema.org (or example.org) type to a Yelp entity
+    This function assigns a schema.org or yelpont type to a Yelp entity
     :param entity: The subject we want to assign a class to.
     :return: The proper class for the entity input.
     """

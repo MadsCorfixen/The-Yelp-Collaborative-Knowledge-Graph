@@ -14,9 +14,9 @@ def run_query(query, as_dataframe=False, do_print=False, include_types=False):
     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
     PREFIX schema: <https://schema.org/> 
     PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> 
-    PREFIX yelpcat: <https://purl.archive.org/purl/yelp/business_categories#>
-    PREFIX yelpont: <https://purl.archive.org/purl/yelp/yelp_ontology#>
-    PREFIX yelpent: <https://purl.archive.org/purl/yelp/yelp_entities#>
+    PREFIX yelpcat: <https://purl.archive.org/purl/yelp/categories#>
+    PREFIX yelpont: <https://purl.archive.org/purl/yelp/vocabulary#>
+    PREFIX yelpent: <https://purl.archive.org/purl/yelp/entities#>
     PREFIX wd: <https://www.wikidata.org/entity/>
     PREFIX skos: <https://www.w3.org/2004/02/skos/core#>
     """

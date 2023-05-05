@@ -9,7 +9,7 @@ from rdflib.namespace import RDFS
 
 from Code.UtilityFunctions.wikidata_functions import wikidata_query
 from Code.KnowledgeGraphEnrichment.location_dicts import states, q_codes
-from Code.KnowledgeGraphEnrichment.location_namespaces import schema, wiki, yelpont, population_predicate, instance_of_predicate,location_predicate
+from Code.KnowledgeGraphEnrichment.location_namespaces import schema, wiki, yelpent, population_predicate, instance_of_predicate,location_predicate
 
 
 def return_city_q_ids(search_string):
@@ -397,7 +397,7 @@ def create_locations_nt(read_dir: str, write_dir: str) -> None:
     for row in data.itertuples():
         if row.city_qid:
             G.add(triple=(
-                URIRef(yelpont[row.business_id]),
+                URIRef(yelpent + "business_id/" + [row.business_id]),
                 URIRef(schema['location']),
                 URIRef(wiki[row.city_qid])
                 ))
@@ -436,7 +436,7 @@ def create_locations_nt(read_dir: str, write_dir: str) -> None:
             elif row.country_qid:
                 G += add_to_graph(row, "city", "country", "Q6256")  # to city
         elif row.state_qid:
-            G.add((URIRef(yelpont[row.business_id]), URIRef(schema['location']), URIRef(wiki[row.state_qid])))
+            G.add((URIRef(yelpent + 'business_id/' + [row.business_id]), URIRef(schema['location']), URIRef(wiki[row.state_qid])))
             G.add((URIRef(wiki[row.state_qid]), URIRef(RDFS.label), Literal(row.state_label, datatype=XSD.string)))
             if row.country_qid:
                 G += add_to_graph(row, "state", "country", "Q6256")  # to state

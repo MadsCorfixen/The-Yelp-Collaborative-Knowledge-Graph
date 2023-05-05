@@ -18,7 +18,7 @@ yelpcat = Namespace("https://purl.archive.org/purl/yelp/categories#")
 yelpont = Namespace("https://purl.archive.org/purl/yelp/vocabulary#")
 yelpent = Namespace("https://purl.archive.org/purl/yelp/entities#")
 
-def create_nt_file(file_name: str, read_dir: str, write_dir: str):
+def create_nt_sample_file(file_name: str, read_dir: str, write_dir: str):
     """
     This function takes as input one of three Yelp JSON files (The tip/checkin files are handled in different functions),
     transforms the objects in that file to RDF format, and writes them to a output file.
@@ -26,12 +26,8 @@ def create_nt_file(file_name: str, read_dir: str, write_dir: str):
     :return: a .nt.gz file with Yelp data in RDF format.
     """
     entity_name = file_name[22:-5]  # Either business, user, or review
-    triple_file = gzip.open(filename=os.path.join(write_dir, f"yelp_{entity_name}.nt.gz"), mode="at", encoding="utf-8")
+    triple_file = gzip.open(filename=os.path.join(write_dir, f"yelp_{entity_name}_sample.nt.gz"), mode="at", encoding="utf-8")
     file_path = os.path.join(read_dir, file_name)
-    
-    # Lists for keeping track of errors
-    none_triples = []
-    error_triples = []
 
     with open(file=file_path, mode="r") as file:
 
@@ -44,6 +40,7 @@ def create_nt_file(file_name: str, read_dir: str, write_dir: str):
         category_cache = set()  # Cache for categories to avoid duplicates.
 
         # Iterate over every object in the JSON file as each object is one line.
+        sample_number = 0
         for line in file:
             try:
                 line = json.loads(line)  # json.loads loads the JSON object into a dictionary.
@@ -172,32 +169,28 @@ def create_nt_file(file_name: str, read_dir: str, write_dir: str):
                 triple_file.write(
                     G.serialize(format='nt'))  # Writes to the .nt file the graph now containing a RDF triple.
 
+                sample_number += 1
+                if sample_number == 20:
+                    break 
+
             except Exception as e:
                 print(e)
                 print(line)
 
     triple_file.close()
     
-    with open(os.path.join("Code", "Errors", f"none_list_{entity_name}.txt"),"wt") as file:
-        for triple in none_triples:
-            print(triple, file=file)
-
-    with open(os.path.join("Code", "Errors", f"error_list_{entity_name}.txt"),"wt") as file:
-        for triple in error_triples:
-            print(triple, file=file)
-
-
-def create_checkin_nt_file(read_dir: str, write_dir: str):
+def create_checkin_nt_sample_file(read_dir: str, write_dir: str):
     """Creates a .nt file containing the checkin data from the Yelp dataset.
     The checkin json only contains two lines, a business id and a string of dates."""
 
     file_name = "yelp_academic_dataset_checkin.json"
     entity_name = file_name[22:-5]
 
-    triple_file = gzip.open(filename=os.path.join(write_dir, f"yelp_{entity_name}.nt.gz"), mode="at", encoding="utf-8")
+    triple_file = gzip.open(filename=os.path.join(write_dir, f"yelp_{entity_name}_sample.nt.gz"), mode="at", encoding="utf-8")
     file_path = os.path.join(read_dir, file_name)
 
     with open(file=file_path, mode="r") as file:
+        sample_number = 0
         for line in file:
             try:
                 line = json.loads(line)
@@ -237,13 +230,16 @@ def create_checkin_nt_file(read_dir: str, write_dir: str):
                     
                 triple_file.write(G.serialize(format='nt'))  # Writes to the .nt file the graph now containing a RDF triple
 
+                sample_number += 1
+                if sample_number == 20:
+                    break
+
             except Exception as e:
                 print(e)
 
     triple_file.close()
 
-
-def create_tip_nt_file(read_dir: str, write_dir: str):
+def create_tip_nt_sample_file(read_dir: str, write_dir: str):
     """
     Special case of the create_nt_file function. This function transforms the tip JSON file to RDF format.
     We do this in a special function because this transformation requires blank nodes.
@@ -253,10 +249,11 @@ def create_tip_nt_file(read_dir: str, write_dir: str):
     file_name = "yelp_academic_dataset_tip.json"
     entity_name = file_name[22:-5]
 
-    triple_file = gzip.open(filename=os.path.join(write_dir, f"yelp_{entity_name}.nt.gz"), mode="at", encoding="utf-8")
+    triple_file = gzip.open(filename=os.path.join(write_dir, f"yelp_{entity_name}_sample.nt.gz"), mode="at", encoding="utf-8")
     file_path = os.path.join(read_dir, file_name)
 
     with open(file=file_path, mode="r") as file:
+        sample_number = 0
         for line in file:
             try:
                 line = json.loads(line)
@@ -291,9 +288,33 @@ def create_tip_nt_file(read_dir: str, write_dir: str):
 
                 triple_file.write(G.serialize(format="nt"))
 
+                sample_number += 1
+                if sample_number == 20:
+                    break
+
             except Exception as e:
                 print(e)
                 print(b_node, _predicate, _object)
 
     triple_file.close()
-    
+
+
+if __name__ == "__main__":
+
+    read_dir = '/home/ubuntu/vol1/OneDrive/DVML-P7/Data'
+    write_dir = '/home/ubuntu/vol1/OneDrive/DVML-P7/Data'
+
+    files = [
+        'yelp_academic_dataset_business.json',
+        'yelp_academic_dataset_user.json',
+        'yelp_academic_dataset_review.json'
+    ]
+
+    for file in files:
+        create_nt_sample_file(file_name=file, read_dir=read_dir, write_dir=write_dir)
+        print("Finished creating NT file for " + file)
+
+    create_checkin_nt_sample_file(read_dir=read_dir, write_dir=write_dir)
+    print("Finished creating Checkin NT file")
+    create_tip_nt_sample_file(read_dir=read_dir, write_dir=write_dir)
+    print("Finished creating all Yelp NT files")

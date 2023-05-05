@@ -4,7 +4,7 @@ import pandas as pd
 from SPARQLWrapper import SPARQLWrapper, JSON
 
 from Code.UtilityFunctions.get_data_path import get_path
-from Code.UtilityFunctions.string_functions import turn_words_singular, space_words_lower
+from Code.UtilityFunctions.string_functions import turn_words_singular
 
 def wikidata_query(sparql_query: str):
     """

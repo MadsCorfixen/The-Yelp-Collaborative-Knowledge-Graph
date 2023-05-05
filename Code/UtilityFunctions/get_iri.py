@@ -1,6 +1,6 @@
 from rdflib import Namespace
 
-yelpent = Namespace("https://purl.archive.org/purl/yelp/yelp_entities#")
+yelpent = Namespace("https://purl.archive.org/purl/yelp/entities#")
 
 def get_iri(filename):
     match filename:

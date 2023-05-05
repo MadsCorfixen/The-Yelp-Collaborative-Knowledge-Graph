@@ -8,8 +8,8 @@ from Code.UtilityFunctions.schema_functions import class_hierarchy
 
 schema = Namespace("https://schema.org/")
 skos = Namespace("https://www.w3.org/2004/02/skos/core#")
-yelpcat = Namespace("https://purl.archive.org/purl/yelp/business_categories#")
-yelpont = Namespace("https://purl.archive.org/purl/yelp/yelp_ontology#")
+yelpcat = Namespace("https://purl.archive.org/purl/yelp/categories#")
+yelpont = Namespace("https://purl.archive.org/purl/yelp/vocabulary#")
 
 def create_schema_hierarchy_file(read_dir: str, write_dir: str):
     """_summary_
