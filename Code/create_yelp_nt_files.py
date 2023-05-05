@@ -3,7 +3,7 @@ import json
 import os
 
 from rdflib import Namespace, Graph, URIRef, Literal, BNode, XSD
-from rdflib.namespace import RDFS, RDF
+from rdflib.namespace import RDF
 from collections import Counter
 
 from Code.UtilityFunctions.dictionary_functions import flatten_dictionary
@@ -270,7 +270,7 @@ def create_tip_nt_file(read_dir: str, write_dir: str):
                               URIRef(schema + "author"),
                               URIRef(yelpent + 'user_id/' + user)))
 
-                # Assigns a RDFS Class to the blank node.
+                # Assigns a RDF type to the blank node.
                 G.add(triple=(URIRef(b_node),
                               RDF.type,
                               URIRef(yelpont + 'Tip')))

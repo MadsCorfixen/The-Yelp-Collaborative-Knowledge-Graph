@@ -1,12 +1,12 @@
 @prefix schema: <http://www.schema.org/> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix yelpent: <https://purl.archive.org/purl/YCKG/entities#> .
 @prefix yelpont: <https://purl.archive.org/purl/YCKG/vocabulary#>
 @prefix yelpcat: <https://purl.archive.org/purl/YCKG/categories#>
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 
 yelpent:business_id/1B
-    rdfs:Class schema:LocalBusiness ;
+    rdf:type schema:LocalBusiness ;
     schema:name "St Honore Pastries"^^xsd:string ;
     yelpont:locatedInCity "Santa Barbara"^^xsd:string ;
     schema:latitude 38.551126^^xsd:decimal ;
@@ -18,13 +18,13 @@ yelpent:business_id/1B
         yelpcat:Coffee_&_Tea, yelpcat:Bakeries .
 
 _:bnode_id1
-    rdfs:Class schema:ParkingFacility ;
+    rdf:type schema:ParkingFacility ;
     yelpont:hasGarage "False"^^xsd:boolean ;
     yelpont:hasStreet "True"^^xsd:boolean ;
     yelpont:hasValet "False"^^xsd:boolean .
 
 yelpent:review_id/2A
-    rdfs:Class schema:UserReview ;
+    rdf:type schema:UserReview ;
     schema:author yelpent:U1 ;
     schema:url <https://www.yelp.com/biz/1B/?hrid=2A> ;
     schema:aggregateRating 4^^xsd:decimal ;
