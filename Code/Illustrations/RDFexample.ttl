@@ -1,8 +1,8 @@
 @prefix schema: <http://www.schema.org/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix yelpent: <https://purl.archive.org/purl/yelp/yelp_entities#> .
-@prefix yelpont: <https://purl.archive.org/purl/yelp/yelp_ontology#>
-@prefix yelpcat: <https://purl.archive.org/purl/yelp/business_categories#>
+@prefix yelpent: <https://purl.archive.org/purl/YCKG/entities#> .
+@prefix yelpont: <https://purl.archive.org/purl/YCKG/vocabulary#>
+@prefix yelpcat: <https://purl.archive.org/purl/YCKG/categories#>
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 
 yelpent:business_id/1B
@@ -33,3 +33,4 @@ yelpent:review_id/2A
     yelpont:cool 0^^xsd:integer ;
     yelpont:funny 5^^xsd:integer ;
     yelpont:useful 3^^xsd:integer .
+
