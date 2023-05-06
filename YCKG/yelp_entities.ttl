@@ -1,5 +1,14 @@
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<PURL LINK to entities>
+##############################################
+
+# Metadata
+
+##############################################
+
+<https://purl.archive.org/purl/yckg/entities>
   a dcat:Dataset ;
   dct:title "The Yelp Collaborative Knowledge Graph"@en ;
   dct:description "The YCKG is the dataset associated with 'The Yelp Collaborative Knowledge Graph' paper. It fully models the Yelp Open Dataset."@en ;
