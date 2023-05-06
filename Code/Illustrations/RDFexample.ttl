@@ -1,27 +1,27 @@
 @prefix schema: <http://www.schema.org/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix yelpent: <https://purl.archive.org/purl/YCKG/entities#> .
-@prefix yelpont: <https://purl.archive.org/purl/YCKG/vocabulary#>
-@prefix yelpcat: <https://purl.archive.org/purl/YCKG/categories#>
+@prefix yelpent: <https://purl.archive.org/purl/yckg/entities#> .
+@prefix yelpvoc: <https://purl.archive.org/purl/yckg/vocabulary#>
+@prefix yelpcat: <https://purl.archive.org/purl/yckg/categories#>
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 
 yelpent:business_id/1B
     rdf:type schema:LocalBusiness ;
     schema:name "St Honore Pastries"^^xsd:string ;
-    yelpont:locatedInCity "Santa Barbara"^^xsd:string ;
+    yelpvoc:locatedInCity "Santa Barbara"^^xsd:string ;
     schema:latitude 38.551126^^xsd:decimal ;
     schema:longitude -90.335695^^xsd:decimal ;
     schema:aggregateRating 3^^xsd:decimal ;
-    yelpont:RestaurantsDelivery "False"^^xsd:boolean ;
-    yelpont:hasBusinessParking _:bnode_id1 ;
+    yelpvoc:RestaurantsDelivery "False"^^xsd:boolean ;
+    yelpvoc:hasBusinessParking _:bnode_id1 ;
     schema:keywords yelpcat:Restaurant, yelpcat:Food, yelpcat:Bubble_Tea,
         yelpcat:Coffee_&_Tea, yelpcat:Bakeries .
 
 _:bnode_id1
     rdf:type schema:ParkingFacility ;
-    yelpont:hasGarage "False"^^xsd:boolean ;
-    yelpont:hasStreet "True"^^xsd:boolean ;
-    yelpont:hasValet "False"^^xsd:boolean .
+    yelpvoc:hasGarage "False"^^xsd:boolean ;
+    yelpvoc:hasStreet "True"^^xsd:boolean ;
+    yelpvoc:hasValet "False"^^xsd:boolean .
 
 yelpent:review_id/2A
     rdf:type schema:UserReview ;
@@ -30,7 +30,7 @@ yelpent:review_id/2A
     schema:aggregateRating 4^^xsd:decimal ;
     schema:dateCreated "2018-07-07 22:09:11"^^xsd:dateTime ;
     schema:description "This businness is ..."^^xsd:string ;
-    yelpont:cool 0^^xsd:integer ;
-    yelpont:funny 5^^xsd:integer ;
-    yelpont:useful 3^^xsd:integer .
+    yelpvoc:cool 0^^xsd:integer ;
+    yelpvoc:funny 5^^xsd:integer ;
+    yelpvoc:useful 3^^xsd:integer .
 
