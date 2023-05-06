@@ -47,7 +47,7 @@ def create_schema_mappings_file(read_dir: str, write_dir: str):
                         mode="at",
                         encoding="utf-8")
     
-    schema_mapping = pd.read_csv(os.path.join(read_dir, "class_mappings_manual.csv"))
+    schema_mapping = pd.read_csv(os.path.join(read_dir, "yelp_category_schema_mappings.csv"))
 
     # the column contains a string representation of a list, so we need to convert it to a list.
     schema_mapping['SchemaType'] = schema_mapping['SchemaType'].apply(lambda x: eval(x))

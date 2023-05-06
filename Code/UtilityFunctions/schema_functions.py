@@ -109,7 +109,7 @@ def class_hierarchy(read_dir: str):
     :return: a dataframe with schema type and its supertype(s).
     """
 
-    class_mappings_manual_df = pd.read_csv(os.path.join(read_dir, 'class_mappings_manual.csv'))
+    class_mappings_manual_df = pd.read_csv(os.path.join(read_dir, 'yelp_category_schema_mappings.csv'))
     class_mappings_manual_df['SchemaType'] = class_mappings_manual_df.SchemaType.str.split(",")
     class_mappings_manual_df = class_mappings_manual_df.explode('SchemaType')
     class_mapping_dict = pd.Series(class_mappings_manual_df.SchemaType.values,index=class_mappings_manual_df.YelpCategory).to_dict()

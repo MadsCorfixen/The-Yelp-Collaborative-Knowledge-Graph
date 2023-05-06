@@ -17,11 +17,11 @@ def create_yelp_wiki_mapping(read_dir: str, write_dir: str) -> None:
     """This function creates a GZIP-compressed .nt file with the Schema-Wikidata mappings.
 
     Args:
-        read_dir (str): The path to the directory in which the function should read files. This function uses the `class_mappings_manual.csv` to retrieve the relevant SchemaTypes to map to Wikidata
+        read_dir (str): The path to the directory in which the function should read files. This function uses the `yelp_category_schema_mappings.csv` to retrieve the relevant SchemaTypes to map to Wikidata
         write_dir (str): The path to the directory in which the function should write the .nt.gz file.
     """
     # Read the csv file containing the Yelp-Schema mappings
-    schema_mapping = pd.read_csv(filepath_or_buffer=os.path.join(read_dir, "class_mappings_manual.csv"))
+    schema_mapping = pd.read_csv(filepath_or_buffer=os.path.join(read_dir, "yelp_category_schema_mappings.csv"))
 
     # the column `SchemaType` contains a string representation of a list, so we convert it to a list using `eval` and `explode`.
     schema_mapping['SchemaType'] = schema_mapping['SchemaType'].apply(lambda x: eval(x))
