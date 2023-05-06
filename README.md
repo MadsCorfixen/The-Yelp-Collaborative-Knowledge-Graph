@@ -1,3 +1,5 @@
+[![10.5281/zenodo.7878447](https://zenodo.org/badge/602131318.svg)](https://zenodo.org/badge/latestdoi/602131318)
+
 # The Yelp Collaborative Knowledge Graph
 This is the GitHub repository associated with the paper "The Yelp Collaborative Knowledge Graph". In here, we present the abstract of the paper and provide details on the knowledge graph structure and namespaces, as well on how to obtain the knowledge graph.
 
