@@ -14,9 +14,9 @@ schema = Namespace("https://schema.org/")
 skos = Namespace("https://www.w3.org/2004/02/skos/core#")
 business_uri = Namespace("https://www.yelp.com/biz/")
 user_uri = Namespace("https://www.yelp.com/user_details?userid=")
-yelpcat = Namespace("https://purl.archive.org/purl/yelp/categories#")
-yelpont = Namespace("https://purl.archive.org/purl/yelp/vocabulary#")
-yelpent = Namespace("https://purl.archive.org/purl/yelp/entities#")
+yelpcat = Namespace("https://purl.archive.org/purl/yckg/categories#")
+yelpvoc = Namespace("https://purl.archive.org/purl/yckg/vocabulary#")
+yelpent = Namespace("https://purl.archive.org/purl/yckg/entities#")
 
 def create_nt_file(file_name: str, read_dir: str, write_dir: str):
     """
@@ -56,16 +56,17 @@ def create_nt_file(file_name: str, read_dir: str, write_dir: str):
 
                 json_key = list(line.keys())[0]  # Each dictionary has the ID as the value to the first key
                 subject = get_iri(file_name) + line[json_key]  # get_iri makes sure the ID is a proper URI.
+                subjectURI = URIRef(subject)
 
                 # Adds a class to all subjects
                 subject_class = get_schema_type(entity_name)
 
-                G.add(triple=(URIRef(subject),
+                G.add(triple=(subjectURI,
                             RDF.type,
                             URIRef(subject_class)))     
 
                 # Creates a triple pointing to the subjects corresponding URL (Best practice).
-                G.add(triple=(URIRef(subject),  
+                G.add(triple=(subjectURI,  
                               URIRef(schema + 'url'),  
                               URIRef(url + line[json_key])))  
                 
@@ -73,7 +74,7 @@ def create_nt_file(file_name: str, read_dir: str, write_dir: str):
 
                 # For reviews create a special triple making a connection between user and the review.
                 if file_name == "yelp_academic_dataset_review.json":
-                    G.add(triple=(URIRef(subject),
+                    G.add(triple=(subjectURI,
                                   URIRef(schema + "author"),
                                   URIRef(yelpent + 'user_id/' + line["user_id"])
                                   ))
@@ -90,7 +91,7 @@ def create_nt_file(file_name: str, read_dir: str, write_dir: str):
                         for category in categories:
                             category = category.replace(' ', '_').replace("&", "_").replace("/", "_")  # Need to replace special characters as we use it as URI
                             G.add(triple=(
-                                URIRef(subject),
+                                subjectURI,
                                 URIRef(schema + "keywords"),
                                 URIRef(yelpcat + category)
                                 ))
@@ -99,7 +100,7 @@ def create_nt_file(file_name: str, read_dir: str, write_dir: str):
                                 G.add(triple=(
                                     URIRef(yelpcat + category),
                                     RDF.type,
-                                    URIRef(yelpont + "YelpCategory")
+                                    URIRef(yelpvoc + "YelpCategory")
                                     ))
                                 
                                 category_cache.add(category)
@@ -118,19 +119,19 @@ def create_nt_file(file_name: str, read_dir: str, write_dir: str):
                         predicate, object_type = get_schema_predicate(_predicate, _object, file_name)
                         b_node = BNode()
 
-                        G.add(triple=(URIRef(subject),
+                        G.add(triple=(subjectURI,
                                       URIRef(predicate),  # E.g., hasBusinessParking, hashours
-                                      URIRef(b_node)))  # Blank Node
+                                      b_node))  # Blank Node
 
                         blanknode_class = get_schema_type(_predicate)
 
-                        G.add(triple=(URIRef(b_node),
+                        G.add(triple=(b_node,
                                       RDF.type,
                                       URIRef(blanknode_class)))
 
                         for sub_predicate, sub_object in _object.items():
-                            G.add(triple=(URIRef(b_node),
-                                          URIRef(yelpont + "has" + sub_predicate),
+                            G.add(triple=(b_node,
+                                          URIRef(yelpvoc + "has" + sub_predicate),
                                           Literal(sub_object)))
                             
                     elif _predicate in ["date", "friends", "elite"]:  # The values to these keys contains listed objects
@@ -144,7 +145,7 @@ def create_nt_file(file_name: str, read_dir: str, write_dir: str):
                                 if _predicate == "date":
                                     obj = obj.replace(" ", "T")  # Cleans the date attribute
 
-                                G.add(triple=(URIRef(subject),
+                                G.add(triple=(subjectURI,
                                               URIRef(predicate),
                                               Literal(obj, datatype=object_type)))
                     
@@ -153,7 +154,7 @@ def create_nt_file(file_name: str, read_dir: str, write_dir: str):
                         predicate, object_type = get_schema_predicate(_predicate, _object, file_name)
                         obj = yelpent + 'business_id/' + _object
                         
-                        G.add(triple=(URIRef(subject),
+                        G.add(triple=(subjectURI,
                                       URIRef(predicate),
                                       URIRef(obj)))
 
@@ -162,7 +163,7 @@ def create_nt_file(file_name: str, read_dir: str, write_dir: str):
                             _object = _object.replace(" ", "T")
 
                         predicate, object_type = get_schema_predicate(_predicate, _object, file_name)
-                        G.add(triple=(URIRef(subject),
+                        G.add(triple=(subjectURI,
                                       URIRef(predicate),
                                       Literal(_object, datatype=object_type)))
                                             
@@ -205,7 +206,7 @@ def create_checkin_nt_file(read_dir: str, write_dir: str):
                 G = Graph()  # Initialize a empty graph object to write a RDF triple to.
 
                 json_key = list(line.keys())[0]  # Each dictionary has the ID as the value to the first key, in this case the business id
-                subject = get_iri(file_name) + line[json_key]  # get_iri makes sure the businnes_id is a valid IRI
+                business = get_iri(file_name) + line[json_key]  # get_iri makes sure the businnes_id is a valid IRI
 
                 dates = line["date"].split(", ")  # The date key contains a list of dates, which we split
 
@@ -219,19 +220,19 @@ def create_checkin_nt_file(read_dir: str, write_dir: str):
                     
                     b_node = BNode()
         
-                    G.add(triple=(URIRef(subject),
-                                  URIRef(yelpont + "hasCheckinDate"),
-                                  URIRef(b_node)))
+                    G.add(triple=(b_node,
+                                  URIRef(schema + "object"),
+                                  URIRef(business)))
                     
-                    G.add(triple=(URIRef(b_node),
+                    G.add(triple=(b_node,
                                   RDF.type,
                                   URIRef(schema + "ArriveAction")))
                     
-                    G.add(triple=(URIRef(b_node),
-                                  URIRef(schema + 'checkinTime'),
+                    G.add(triple=(b_node,
+                                  URIRef(schema + 'startTime'),
                                   Literal(date, datatype=XSD.dateTime)))
                     
-                    G.add(triple=(URIRef(b_node),
+                    G.add(triple=(b_node,
                                  URIRef(schema + 'interactionStatistic'),
                                  Literal(count, datatype=XSD.integer)))
                     
@@ -266,14 +267,14 @@ def create_tip_nt_file(read_dir: str, write_dir: str):
                 del line["user_id"]
 
                 # Creates the edge between a user and their tip
-                G.add(triple=(URIRef(b_node),
+                G.add(triple=(b_node,
                               URIRef(schema + "author"),
                               URIRef(yelpent + 'user_id/' + user)))
 
                 # Assigns a RDF type to the blank node.
-                G.add(triple=(URIRef(b_node),
+                G.add(triple=(b_node,
                               RDF.type,
-                              URIRef(yelpont + 'Tip')))
+                              URIRef(yelpvoc + 'Tip')))
 
                 for _predicate, _object in line.items():
                     predicate, object_type = get_schema_predicate(_predicate, _object, file_name)
@@ -285,7 +286,7 @@ def create_tip_nt_file(read_dir: str, write_dir: str):
                     else:
                         obj = _object
 
-                    G.add(triple=(URIRef(b_node),
+                    G.add(triple=(b_node,
                                   URIRef(predicate),
                                   Literal(obj, datatype=object_type)))
 

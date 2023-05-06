@@ -8,13 +8,12 @@ from Code.UtilityFunctions.get_data_path import get_path
 from Code.UtilityFunctions.string_functions import string_is_float
 
 schema = Namespace("https://schema.org/")
-example = Namespace("https://example.org/")
-yelpont = Namespace("https://purl.archive.org/purl/yelp/vocabulary#")
+yelpvoc = Namespace("https://purl.archive.org/purl/yckg/vocabulary#")
 
 def get_schema_predicate(predicate, obj=None, file=None):
     """
     This match function gets as input keys and values from the Yelp JSON files and tries to map the keys to proper
-    schema.org predicates and proper XSD datatypes. If no schema.org predicate can be found, create an yelpont
+    schema.org predicates and proper XSD datatypes. If no schema.org predicate can be found, create an yelpvoc
     predicate based on the input "predicate" and with "obj" datatype as XSD datatype.
     :param predicate: A key from the JSON file
     :param obj: The value pair from the JSON file
@@ -49,11 +48,11 @@ def get_schema_predicate(predicate, obj=None, file=None):
         case "text":
             return schema + "description", XSD.string
         case "city":
-            return yelpont + "locatedInCity", XSD.string
+            return yelpvoc + "locatedInCity", XSD.string
         case "state":
-            return yelpont + "locatedInState", XSD.string
+            return yelpvoc + "locatedInState", XSD.string
         case "BusinessParking" | "GoodForMeal" | "Ambience" | "Music" | "BestNights" | "HairSpecializesIn" | "DietaryRestrictions" | "hours":
-            return yelpont + "has" + predicate.capitalize() if predicate == "hours" else yelpont + "has" + predicate, XSD.string
+            return yelpvoc + "has" + predicate.capitalize() if predicate == "hours" else yelpvoc + "has" + predicate, XSD.string
         # If no schema.org predicate can be found, create predicate using Yelp ontology.
         # Also assign the object datatype, by checking the original type.
         case _:  
@@ -75,12 +74,12 @@ def get_schema_predicate(predicate, obj=None, file=None):
                 print("Error in SCHEMA!", "Type: ", type(obj))
                 print(predicate, obj)
                 pass
-            return yelpont + predicate, object_type
+            return yelpvoc + predicate, object_type
 
 
 def get_schema_type(entity: str):
     """
-    This function assigns a schema.org or yelpont type to a Yelp entity
+    This function assigns a schema.org or yelpvoc type to a Yelp entity
     :param entity: The subject we want to assign a class to.
     :return: The proper class for the entity input.
     """

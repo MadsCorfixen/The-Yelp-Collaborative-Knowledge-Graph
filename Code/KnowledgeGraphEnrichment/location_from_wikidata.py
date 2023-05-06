@@ -9,7 +9,7 @@ from rdflib.namespace import RDFS
 
 from Code.UtilityFunctions.wikidata_functions import wikidata_query
 from Code.KnowledgeGraphEnrichment.location_dicts import states, q_codes
-from Code.KnowledgeGraphEnrichment.location_namespaces import schema, wiki, yelpent, population_predicate, instance_of_predicate,location_predicate
+from Code.KnowledgeGraphEnrichment.location_namespaces import schema, wd, yelpent, population_predicate, instance_of_predicate,location_predicate
 
 
 def return_city_q_ids(search_string):
@@ -359,21 +359,21 @@ def add_to_graph(row, lower_level, higher_level, higher_instance):
     graph = Graph()
 
     graph.add(triple=(
-        URIRef(wiki[eval(f"row.{lower_level}_qid")]),
+        URIRef(wd[eval(f"row.{lower_level}_qid")]),
         URIRef(location_predicate),
-        URIRef(wiki[eval(f"row.{higher_level}_qid")])
+        URIRef(wd[eval(f"row.{higher_level}_qid")])
         ))
     
     graph.add(triple=(
-        URIRef(wiki[eval(f"row.{higher_level}_qid")]),
+        URIRef(wd[eval(f"row.{higher_level}_qid")]),
         URIRef(RDFS.label),
         Literal(eval(f"row.{higher_level}_label"), datatype=XSD.string)
         ))
     
     graph.add(triple=(
-        URIRef(wiki[eval(f"row.{higher_level}_qid")]),
+        URIRef(wd[eval(f"row.{higher_level}_qid")]),
         URIRef(instance_of_predicate),
-        URIRef(wiki + higher_instance)
+        URIRef(wd + higher_instance)
         ))
 
     return graph
@@ -399,24 +399,24 @@ def create_locations_nt(read_dir: str, write_dir: str) -> None:
             G.add(triple=(
                 URIRef(yelpent + "business_id/" + [row.business_id]),
                 URIRef(schema['location']),
-                URIRef(wiki[row.city_qid])
+                URIRef(wd[row.city_qid])
                 ))
             
             G.add(triple=(
-                URIRef(wiki[row.city_qid]),
+                URIRef(wd[row.city_qid]),
                 URIRef(RDFS.label),
                 Literal(row.city_label, datatype=XSD.string)
                 ))
             
             G.add(triple=(
-                URIRef(wiki[row.city_qid]),
+                URIRef(write_dir[row.city_qid]),
                 URIRef(instance_of_predicate),
-                URIRef(wiki + "Q486972")
+                URIRef(wd + "Q486972")
                 ))
 
             if row.population:
                 G.add(triple=(
-                    URIRef(wiki[row.city_qid]),
+                    URIRef(wd[row.city_qid]),
                     URIRef(population_predicate),
                     Literal(row.population, datatype=XSD.integer)
                     ))
@@ -436,8 +436,8 @@ def create_locations_nt(read_dir: str, write_dir: str) -> None:
             elif row.country_qid:
                 G += add_to_graph(row, "city", "country", "Q6256")  # to city
         elif row.state_qid:
-            G.add((URIRef(yelpent + 'business_id/' + [row.business_id]), URIRef(schema['location']), URIRef(wiki[row.state_qid])))
-            G.add((URIRef(wiki[row.state_qid]), URIRef(RDFS.label), Literal(row.state_label, datatype=XSD.string)))
+            G.add((URIRef(yelpent + 'business_id/' + [row.business_id]), URIRef(schema['location']), URIRef(wd[row.state_qid])))
+            G.add((URIRef(wd[row.state_qid]), URIRef(RDFS.label), Literal(row.state_label, datatype=XSD.string)))
             if row.country_qid:
                 G += add_to_graph(row, "state", "country", "Q6256")  # to state
 

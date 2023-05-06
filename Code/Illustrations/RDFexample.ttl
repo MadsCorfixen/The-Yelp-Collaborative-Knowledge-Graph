@@ -14,7 +14,7 @@ yelpent:business_id/1B
     schema:aggregateRating 3^^xsd:decimal ;
     yelpont:RestaurantsDelivery "False"^^xsd:boolean ;
     yelpont:hasBusinessParking _:bnode_id1 ;
-    schema:category yelpcat:Restaurant, yelpcat:Food, yelpcat:Bubble_Tea,
+    schema:keywords yelpcat:Restaurant, yelpcat:Food, yelpcat:Bubble_Tea,
         yelpcat:Coffee_&_Tea, yelpcat:Bakeries .
 
 _:bnode_id1

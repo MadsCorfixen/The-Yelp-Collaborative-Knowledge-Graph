@@ -8,8 +8,8 @@ from Code.UtilityFunctions.schema_functions import class_hierarchy
 
 schema = Namespace("https://schema.org/")
 skos = Namespace("https://www.w3.org/2004/02/skos/core#")
-yelpcat = Namespace("https://purl.archive.org/purl/yelp/categories#")
-yelpont = Namespace("https://purl.archive.org/purl/yelp/vocabulary#")
+yelpcat = Namespace("https://purl.archive.org/purl/yckg/categories#")
+yelpvoc = Namespace("https://purl.archive.org/purl/yckg/vocabulary#")
 
 def create_schema_hierarchy_file(read_dir: str, write_dir: str):
     """_summary_
@@ -69,7 +69,7 @@ def create_schema_mappings_file(read_dir: str, write_dir: str):
 
         if row.SchemaType not in category_mappings_cache:
             G.add(triple=(
-                URIRef(yelpont + "SchemaCategory"),
+                URIRef(yelpvoc + "SchemaCategory"),
                 URIRef(skos + "Member"),
                 URIRef(row.SchemaType)
             ))
