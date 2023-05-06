@@ -58,7 +58,7 @@ The dataset is uploaded on [https://zenodo.org/](https://zenodo.org/).
 To run the code yourself and obtain the YCKG, follow the following steps:
 1. Download the [Yelp Open Dataset](https://www.yelp.com/dataset) and put it into a folder of your choice
 2. Download the data from the Github folder [UtilityData](UtilityData) and also put it into the same folder as YOD.
-   - ```schemaorg-current-https-types.csv```. This file contains the definition of all terms in, all sections of, the vocabulary, plus terms retired from the vocabulary as of Fall 2022. Is used to add the hierarchy of the mapped Schema types to the YCKG.
+   - ```schemaorg-current-https-types.csv```. This file contains the definition of all terms in, all sections of, the vocabulary, plus terms retired from the vocabulary as of Fall 2022. Is used to add the hierarchy of the mapped Schema types to the YCKG. For an up to date version, download from [Schema.org](https://schema.org/docs/developers.html).
    - ```yelp_category_schema_mappings.csv```. This file contains the 310 mappings from Yelp categories to Schema types. These mappings have been manually verified to be correct.
 3. In the terminal run
 
