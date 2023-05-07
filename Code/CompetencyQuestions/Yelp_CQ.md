@@ -357,7 +357,7 @@ GROUP BY ?year ?month
 from datetime import datetime
 reviewers = 0
 # Open JSON file for reading
-with open(file=get_path("yelp_academic_dataset_review.json"), mode="r") as file:
+with open(file=os.path.join(read_dir, "yelp_academic_dataset_review.json"), mode="r") as file:
     # Iterate through each line in the file
     for line in file:
         # Parse line as a dictionary
@@ -392,7 +392,7 @@ WHERE {
 # Initialize empty list to store business parking options
 BusinessParking = []
 # Open JSON file for reading
-with open(file=get_path("yelp_academic_dataset_business.json"), mode="r") as file:
+with open(file=os.path.join(read_dir, "yelp_academic_dataset_business.json"), mode="r") as file:
     # Iterate through each line in the file
     for line in file:
         # Parse line as a dictionary
@@ -448,7 +448,7 @@ from collections import Counter
 karaoke_values = []
 
 # Open the input file for reading
-with open(file=get_path("yelp_academic_dataset_business.json"), mode="r") as file:
+with open(file=os.path.join(read_dir, "yelp_academic_dataset_business.json"), mode="r") as file:
     # Iterate over each line in the file
     for line in file:
         # Load the JSON data from the line
