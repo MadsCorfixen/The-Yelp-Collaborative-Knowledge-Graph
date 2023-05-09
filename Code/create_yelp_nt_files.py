@@ -23,8 +23,6 @@ def create_nt_file(file_name: str, read_dir: str, write_dir: str):
     This function takes as input one of three Yelp JSON files (The tip/checkin files are handled in different functions),
     transforms the objects in that file to RDF format, and writes them to a output file.
     :param file_name: The Yelp JSON file to transform to RDF.
-    :param read_dir: The directory to read the Yelp JSON file from.
-    :param write_dir: The directory to write the RDF file to.
     :return: a .nt.gz file with Yelp data in RDF format.
     """
     entity_name = file_name[22:-5]  # Either business, user, or review
@@ -43,33 +41,36 @@ def create_nt_file(file_name: str, read_dir: str, write_dir: str):
         elif file_name == 'yelp_academic_dataset_user.json':
             url = user_uri
             
-        category_cache = set()  # Cache for categories to avoid triple duplicates.
+        category_cache = set()  # Cache for categories to avoid duplicates.
 
         # Iterate over every object in the JSON file as each object is one line.
         for line in file:
             try:
                 line = json.loads(line)  # json.loads loads the JSON object into a dictionary.
 
-                # If the file is reviews, the URL depends on the line being iterated over.
+                # If the file is reviews, the url depends on the line being iterated over.
                 if file_name == 'yelp_academic_dataset_review.json':
                     url = business_uri + line['business_id'] + '?hrid='
 
-                G = Graph()  # Initialize an empty graph object to write triples to.
+                G = Graph()  # Initialize a empty graph object to write a RDF triple to.
 
                 json_key = list(line.keys())[0]  # Each dictionary has the ID as the value to the first key
-                subject = get_iri(file_name) + line[json_key]  # get_iri makes sure the ID is a proper IRI.
+                subject = get_iri(file_name) + line[json_key]  # get_iri makes sure the ID is a proper URI.
                 subjectURI = URIRef(subject)
-                subject_class = get_schema_type(entity_name) #get_schema_type returns the schema type for the entity.
+
+                # Adds a class to all subjects
+                subject_class = get_schema_type(entity_name)
 
                 G.add(triple=(subjectURI,
                             RDF.type,
                             URIRef(subject_class)))     
 
+                # Creates a triple pointing to the subjects corresponding URL (Best practice).
                 G.add(triple=(subjectURI,  
                               URIRef(schema + 'url'),  
                               URIRef(url + line[json_key])))  
                 
-                del line[json_key]  # After assigning the IRI to the subject variable, we no longer need the first key/value pair
+                del line[json_key]  # After assigning the URI to the subject variable, we no longer need the first key/value pair
 
                 # For reviews create a special triple making a connection between user and the review.
                 if file_name == "yelp_academic_dataset_review.json":
@@ -88,8 +89,7 @@ def create_nt_file(file_name: str, read_dir: str, write_dir: str):
                         del line['categories']  # No longer need this key/value pair.
                         
                         for category in categories:
-                            category = category.replace(' ', '_').replace("&", "_").replace("/", "_")  # Need to replace special characters as we use it as IRI.
-
+                            category = category.replace(' ', '_').replace("&", "_").replace("/", "_")  # Need to replace special characters as we use it as URI
                             G.add(triple=(
                                 subjectURI,
                                 URIRef(schema + "keywords"),
@@ -120,8 +120,8 @@ def create_nt_file(file_name: str, read_dir: str, write_dir: str):
                         b_node = BNode()
 
                         G.add(triple=(subjectURI,
-                                      URIRef(predicate),  
-                                      b_node))  
+                                      URIRef(predicate),  # E.g., hasBusinessParking, hashours
+                                      b_node))  # Blank Node
 
                         blanknode_class = get_schema_type(_predicate)
 
@@ -137,6 +137,8 @@ def create_nt_file(file_name: str, read_dir: str, write_dir: str):
                     elif _predicate in ["date", "friends", "elite"]:  # The values to these keys contains listed objects
                         obj_lst = _object.split(", ") if _predicate != "elite" else _object.split(",")  # Splits the listed objects
 
+                        # get_schema_predicate assigns returns a proper schema.org predicate based on the key
+                        # and a proper object datatype.
                         predicate, object_type = get_schema_predicate(_predicate, _object, file_name)
                         if obj_lst:
                             for obj in obj_lst:
@@ -187,7 +189,7 @@ def create_nt_file(file_name: str, read_dir: str, write_dir: str):
 
 
 def create_checkin_nt_file(read_dir: str, write_dir: str):
-    """Creates a .nt file containing the Checkin data from the Yelp dataset.
+    """Creates a .nt file containing the checkin data from the Yelp dataset.
     The checkin json only contains two lines, a business id and a string of dates."""
 
     file_name = "yelp_academic_dataset_checkin.json"
@@ -201,7 +203,7 @@ def create_checkin_nt_file(read_dir: str, write_dir: str):
             try:
                 line = json.loads(line)
 
-                G = Graph()  
+                G = Graph()  # Initialize a empty graph object to write a RDF triple to.
 
                 json_key = list(line.keys())[0]  # Each dictionary has the ID as the value to the first key, in this case the business id
                 business = get_iri(file_name) + line[json_key]  # get_iri makes sure the businnes_id is a valid IRI
@@ -214,6 +216,7 @@ def create_checkin_nt_file(read_dir: str, write_dir: str):
                 date_counter = Counter(dates) # Counts the number of times a date appears in the list
 
                 for date, count in date_counter.items():
+                    
                     
                     b_node = BNode()
         
@@ -244,6 +247,7 @@ def create_checkin_nt_file(read_dir: str, write_dir: str):
 def create_tip_nt_file(read_dir: str, write_dir: str):
     """
     Special case of the create_nt_file function. This function transforms the tip JSON file to RDF format.
+    We do this in a special function because this transformation requires blank nodes.
     :return: A .nt.gz file with Yelp tip data in RDF format.
     """
 

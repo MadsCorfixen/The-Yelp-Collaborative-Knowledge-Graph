@@ -7,6 +7,9 @@ from time import sleep
 import pandas as pd
 from geopy.geocoders import Nominatim
 
+from Code.UtilityFunctions.get_data_path import get_path
+
+
 def find_business_locations(df: pd.DataFrame,
                               coordinate_rounding: int=2,
                               min_delay_seconds: int=1,
@@ -77,6 +80,11 @@ def find_business_locations(df: pd.DataFrame,
     # Remove the rounded coordinate set column
     updated_businesses.drop("coordinate_set", inplace=True, axis=1)
     updated_businesses = updated_businesses[["business_id", "neighbourhood", "postcode", "city", "county", "state", "country"]]
-    
-    return updated_businesses
+    updated_businesses.to_csv(get_path("business_locations.csv"), index=False)
+
+
+if __name__ == '__main__':
+    business_file = "yelp_academic_dataset_business.json"
+    businesses = pd.read_json(path_or_buf=get_path(business_file), lines=True)
+    find_business_locations(businesses, report_missing=True)
     

@@ -12,15 +12,14 @@ from Code.KnowledgeGraphEnrichment.location_dicts import states, q_codes
 from Code.KnowledgeGraphEnrichment.location_namespaces import schema, wd, yelpent, population_predicate, instance_of_predicate,location_predicate
 
 
-def return_city_q_ids(search_string: str):
-    """Queries the Wikidata API for the q_ids of the cities matching the search string (city, state). If the API call is empty, try again 
-    with just the city name. If that is empty, return an empty string.
+def return_city_q_ids(search_string):
+    """_summary_
 
     Args:
-        search_string (str): The string to search for
+        search_string (_type_): _description_
 
     Returns:
-        str: A string with the q_ids of the cities matching the search string, separated by spaces
+        _type_: _description_
     """
 
     url = f"https://www.wikidata.org/w/api.php?action=wbsearchentities&format=json&language=en&type=item&continue=0&search={search_string}"
@@ -43,13 +42,14 @@ def return_city_q_ids(search_string: str):
     return str_q_ids
 
 
-def return_state_q_ids(search_string: str):
-    """Queries the Wikidata API for the q_ids of the states matching the search string (state).
+def return_state_q_ids(search_string):
+    """_summary_
+
     Args:
-        search_string (str): The string to search for
+        search_string (_type_): _description_
 
     Returns:
-        str: A string with the q_ids of the state matching the search string, separated by spaces.
+        _type_: _description_
     """
 
     url = f"https://www.wikidata.org/w/api.php?action=wbsearchentities&format=json&language=en&type=item&continue=0&search={search_string}"
@@ -64,14 +64,13 @@ def return_state_q_ids(search_string: str):
     return str_q_ids
 
 
-def city_query(q_ids: str, location: str):
-    """A query function to find the closest city to a given location within 100 km.
+def city_query(q_ids, location):
+    """_summary_
 
     Args:
-        q_ids (str): The q_ids of the cities to search for
-        location (str): The lat-long coordiantes of the location to search around
+        q_ids (_type_): _description_
+        location (_type_): _description_
     """
-
     query = f"""
     SELECT DISTINCT ?qid ?qidLabel
     WHERE {{
@@ -93,15 +92,14 @@ def city_query(q_ids: str, location: str):
 
 
 def qid_city(q_ids: str, location: str):
-    """Finds the closest city to a given location within 100 km
+    """_summary_
 
     Args:
-        q_ids (str): The q_ids of the cities to search for
-        location (str): The lat-long coordiantes of the location to search around
+        q_ids (str): _description_
+        location (str): _description_
 
     Returns:
-        str: The found q_id.
-        str: The label of the found q_id.
+        _type_: _description_
     """
 
     if not q_ids:
@@ -120,11 +118,10 @@ def qid_city(q_ids: str, location: str):
 
 
 def state_query(q_ids):
-    """A query function to find the state/province of a given q_id. Searches only for q_ids that have a property path P31 (instance of)
-    and after that a property path P279 (subclass of) that leads to either a state or a province. Also filters out countries.
+    """_summary_
 
     Args:
-        q_ids (str): The q_ids to find states for
+        q_ids (_type_): _description_
     """
 
     query = f"""
@@ -159,7 +156,6 @@ def qid_state(row: str):
 
     returned_table = wikidata_query(state_query(row["state_q_ids"]))
     q_ids_list = [x[3:] for x in row["state_q_ids"].split(" ")]
-    
     if returned_table.empty:
         returned_qids = []
     else:

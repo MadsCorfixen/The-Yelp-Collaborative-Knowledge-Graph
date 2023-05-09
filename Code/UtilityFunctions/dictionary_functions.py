@@ -33,4 +33,6 @@ if __name__ == '__main__':
               'hours': {'Monday': '8:0-22:0', 'Tuesday': '8:0-22:0', 'Wednesday': '8:0-22:0', 'Thursday': '8:0-22:0',
                         'Friday': '8:0-23:0', 'Saturday': '8:0-23:0', 'Sunday': '8:0-22:0'}}
 
+    # print(ordbog["atributes"])
+    #
     print(flatten_dictionary(ordbog))

@@ -39,3 +39,10 @@ def turn_words_singular(categories_dict):
 
 def space_words_lower(string):
     return re.sub('(?<!^)([A-Z])([^A-Z])', r' \1\2', string).lower()
+
+if __name__ == '__main__':
+    p = inflect.engine()
+    print(p.singular_noun('bakery'))
+    print(p.singular_noun('bakeries'))
+
+

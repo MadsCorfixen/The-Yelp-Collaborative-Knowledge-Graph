@@ -4,9 +4,7 @@ from pandas import json_normalize
 
 
 def run_query(query, as_dataframe=False, do_print=False, include_types=False):
-    """This function is used to query the local Virtuoso instance.
-    """
-    
+
     endpoint = SPARQLWrapper("http://localhost:8890/sparql")
     endpoint.setReturnFormat(JSON)
     endpoint.setTimeout(1200)
