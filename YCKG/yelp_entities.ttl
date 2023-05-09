@@ -17,4 +17,4 @@
   dct:language "en" ;
   dct:issued "2023-05-08"^^xsd:date ;
   dct:modified "2023-05-08"^^xsd:date ;
-  dcat:downloadURL "Zenodo LINK" .
+  dcat:downloadURL "10.5281/zenodo.7878447" .

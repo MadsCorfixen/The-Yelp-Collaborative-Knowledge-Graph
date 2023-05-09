@@ -1,30 +1,29 @@
-import re
+import os
 import pandas as pd
 import numpy as np
 
-from Code.UtilityFunctions.get_data_path import get_path
-from Code.UtilityFunctions.string_functions import turn_words_singular
-
+from Code.UtilityFunctions.string_functions import turn_words_singular, space_words_lower
 from sentence_transformers import SentenceTransformer
 
 pd.options.mode.chained_assignment = None
 
+def clean_yelp_categories(read_dir: str):
+    """
+    Args:
+        read_dir (str): the path to read the data from
 
-model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
+    Returns:
+        list: A list containing all categories, having split the categories with & or /, and singularized
+        dict: A dictionary with the original categories as keys and the singularized, and split, categories as values
+    """
 
-biz = pd.read_json(get_path("yelp_academic_dataset_business.json"), lines=True)
-schema = pd.read_csv(get_path("schemaorg-current-https-types.csv"))[["label", "subTypeOf"]]
+    biz = pd.read_json(path_or_buf=os.path.join(read_dir, "yelp_academic_dataset_business.json"), lines=True)
 
-
-def space_words_lower(string):
-    return re.sub('(?<!^)([A-Z])([^A-Z])', r' \1\2', string).lower()
-
-
-def clean_yelp_categories():
     categories_unique = list(set(biz["categories"].str.cat(sep=', ').split(sep=', ')))
     categories_dict = {categories_unique[i]: [categories_unique[i]] for i in range(len(categories_unique))}
 
-    cat_string_manually_handled_dict = pd.read_excel(get_path("split_categories.xlsx"), sheet_name="Sheet1", index_col=0, names=['column']).to_dict()['column']
+    cat_string_manually_handled_df = pd.read_csv(filepath_or_buffer=os.path.join(read_dir, "manually_split_categories.csv"), delimiter=";", header=0)
+    cat_string_manually_handled_dict = dict(zip(cat_string_manually_handled_df.iloc[:,0], cat_string_manually_handled_df.iloc[:,1]))
     cat_string_manually_handled_dict = {k: v.split(', ') for k, v in cat_string_manually_handled_dict.items()}
     categories_dict.update(cat_string_manually_handled_dict)
 
@@ -35,7 +34,18 @@ def clean_yelp_categories():
     return yelp_categories, yelp_categories_dict
 
 
-def clean_schema_categories():
+def clean_schema_categories(read_dir: str):
+    """
+    Args:
+        read_dir (str): the path to read the data from
+
+    Returns:
+        list: All Schema types turned to lowercase
+        dict: All Schema types turned to lowercase as keys and original as values
+    """
+
+    schema = pd.read_csv(filepath_or_buffer=os.path.join(read_dir, "schemaorg-current-https-types.csv"))[["label", "subTypeOf"]]
+
     schema_categories = list(map(lambda x: space_words_lower(x), schema["label"].tolist()))
     schema_categories_dict = dict(zip(schema_categories, schema["label"].tolist()))
 
@@ -43,14 +53,31 @@ def clean_schema_categories():
 
 
 def cos_sim_2d(x, y):
+    """Calculates the cosine similarity between two 2d arrays
+    """
+
     norm_x = x / np.linalg.norm(x, axis=1, keepdims=True)
     norm_y = y / np.linalg.norm(y, axis=1, keepdims=True)
+
     return np.matmul(norm_x, norm_y.T)
 
 
-def category_mappings(threshold):
-    yelp_categories, yelp_categories_dict = clean_yelp_categories()
-    schema_categories, schema_categories_dict = clean_schema_categories()
+def category_mappings(threshold: float, read_dir: str):
+    """Cleans the categories from Yelp and the Schema types. Then calculates the cosine similarity between the two, '
+    and finds mappings above a threshold.
+
+    Args:
+        threshold (float): The threshold for the cosine similarity
+        read_dir (str): the path to read the data from
+
+    Returns:
+        dict: A dictionary containing the Yelp category as key and the mapped Schema types as values.
+    """
+
+    model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
+
+    yelp_categories, yelp_categories_dict = clean_yelp_categories(read_dir)
+    schema_categories, schema_categories_dict = clean_schema_categories(read_dir)
 
     swapped_yelp_categories = {sub_value: key for key, value in yelp_categories_dict.items() for sub_value in value}
 
@@ -75,13 +102,3 @@ def category_mappings(threshold):
 
     return mapping_dictionary
 
-
-if __name__ == "__main__":
-    import time
-    start = time.time()
-    mappings = category_mappings(0.68)
-    print(mappings)
-    print(f"It took {(time.time() - start)} seconds")
-
-    class_mapping_df = pd.DataFrame(list(mappings.items()), columns=['YelpCategory', 'SchemaType'])
-    class_mapping_df.to_csv(path_or_buf=get_path("class_mappings.csv"), index=False)
