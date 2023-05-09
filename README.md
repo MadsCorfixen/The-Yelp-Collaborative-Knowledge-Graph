@@ -39,7 +39,7 @@ This section is split into two ways to get the YCKG. You can either [download th
 This tool was implemented in Python 3.10.6. For packages used and their versions, see [requirements.txt](requirements.txt).
 
 ### Zenodo
-The dataset is uploaded on [https://zenodo.org/](https://zenodo.org/). 
+The dataset is uploaded on [https://zenodo.org/]([https://zenodo.org/](https://zenodo.org/record/7878447)). 
 - Graph Data Triple Files
     - One sample file for each of the Yelp domains (Businesses, Users, Reviews, Tips and Checkins), containing 20 entities.
     - ```yelp_schema_mappings.nt.gz``` containing the mappings from Yelp categories to Schema things.
