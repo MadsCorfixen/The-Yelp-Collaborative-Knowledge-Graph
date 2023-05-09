@@ -88,28 +88,25 @@ len(review_unique_business)
 
 >> 150346
 ```
-## CQ 5: How many businesses have, on average, a rating of 4.5?
+## CQ 5: How many businesses have, on average, a above 4?
 **SPARQL Query**
 ```sparql
 SELECT COUNT(DISTINCT(?business)) AS ?count
 WHERE {
     ?business schema:aggregateRating ?rating .
-    FILTER (?rating = 4.5) .
+    FILTER (?rating > 4) .
 }
 ```
 
 |  **?count**  |
 |--------------|
-|    27,181    |
+|    43,488    |
 
 **Correct Answer**
 ```python
-business[business['stars'] == 4.5].groupby('stars')['stars'].count()
+business[business['stars'] > 4]['stars'].count()
 
->>
-stars
-4.5    27181
-Name: stars, dtype: int64
+>> 43488
 ```
 
 ## CQ 6: What is the average rating across businesses?
@@ -234,30 +231,30 @@ reviews.drop_duplicates(subset=['user_id']).shape[0]
 >> 1987929
 ```
 
-## CQ 11: How many users have 10 friends?
+## CQ 11: How many users have more than 10 friends?
 **SPARQL Query**
 ```sparql
 SELECT COUNT(*) as ?usersWith10Friends
 WHERE {
     SELECT ?user COUNT(?friend) AS ?countUsers
     WHERE {
-        ?user rdfs:Class schema:Person .
+        ?user rdf:type schema:Person .
         ?user schema:knows ?friend .
     }
     GROUP BY ?user
-    HAVING (COUNT(?friend) = 10)
+    HAVING (COUNT(?friend) > 10)
 }
 ```
 |  **?usersWith10Friends**  |
 |---------------------------|
-|           13,579          |
+|           758,803         |
 
 **Correct Answer**
 ```python
 users["amountFriends"] = users["friends"].apply(lambda x: len(x.split(",")))
-users[users["amountFriends"] == 10].shape[0]
+users[users["amountFriends"] > 10].shape[0]
 
->> 13579
+>> 758803
 ```
 
 ## CQ 12: How many friends does a user have on average?
