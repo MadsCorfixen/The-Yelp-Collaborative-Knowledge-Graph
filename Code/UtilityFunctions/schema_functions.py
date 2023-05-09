@@ -4,7 +4,6 @@ from networkx import DiGraph
 from networkx.algorithms.traversal.depth_first_search import dfs_tree
 from rdflib import Namespace, XSD
 
-from Code.UtilityFunctions.get_data_path import get_path
 from Code.UtilityFunctions.string_functions import string_is_float
 
 schema = Namespace("https://schema.org/")
@@ -105,7 +104,7 @@ def get_schema_type(entity: str):
 
 def class_hierarchy(read_dir: str):
     """
-    This function is used to create the hierarchy only for the relevant schema.org types for this ontology.
+    This function is used to create the hierarchy only for the mapped Schema types.
     :return: a dataframe with schema type and its supertype(s).
     """
 

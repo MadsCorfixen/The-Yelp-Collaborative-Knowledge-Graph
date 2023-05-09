@@ -14,7 +14,7 @@ yelpcat = Namespace("https://purl.archive.org/purl/yckg/categories#")
 yelpvoc = Namespace("https://purl.archive.org/purl/yckg/vocabulary#")
 
 def create_yelp_wiki_mapping(read_dir: str, write_dir: str) -> None:
-    """This function creates a GZIP-compressed .nt file with the Schema-Wikidata mappings.
+    """This function creates a GZIP-compressed .nt file with the Yelp-Wikidata mappings.
 
     Args:
         read_dir (str): The path to the directory in which the function should read files. This function uses the `yelp_category_schema_mappings.csv` to retrieve the relevant SchemaTypes to map to Wikidata

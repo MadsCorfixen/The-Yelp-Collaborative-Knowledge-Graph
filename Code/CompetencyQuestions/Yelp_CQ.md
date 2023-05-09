@@ -5,7 +5,7 @@
 ```sparql
 SELECT COUNT(DISTINCT(?category)) AS ?uniqueCategories
 WHERE {
-    ?business schema:category ?category .
+    ?business schema:keywords ?category .
 }
 ```
 
@@ -26,7 +26,7 @@ print(len(unique_categories))
 ```sparql
 SELECT COUNT(DISTINCT(?business)) AS ?numberRestaurants
 WHERE {
-    ?business schema:category yelpcat:Restaurants .
+    ?business schema:keywords yelpcat:Restaurants .
 }
 ```
 |  **?numberRestaurants** |
@@ -49,7 +49,7 @@ print(counter)
 ```sparql
 SELECT DISTINCT (COUNT(?business) as ?businessCount)
 WHERE {
-    ?business schema:category yelpcat:Restaurants .
+    ?business schema:keywords yelpcat:Restaurants .
     ?review schema:about ?business .
 }
 ```
@@ -73,7 +73,7 @@ len(review_unique_business[mask])
 SELECT COUNT(DISTINCT(?business))
 WHERE {
     ?review schema:about ?business .
-    ?review rdfs:Class schema:UserReview .
+    ?review rdf:type schema:UserReview .
 }
 
 ```
@@ -155,8 +155,8 @@ len(business_santa_barbara)
 ```sparql
 SELECT ?business ?year ?month ?day SUM(?visit) as ?numberOfVisits
 WHERE {
-    ?business yelpont:hasCheckinDate ?blanknode .
-    ?blanknode schema:checkinTime ?time .
+    ?blanknode schema:object ?business .
+    ?blanknode schema:startTime ?time .
     ?blanknode schema:interactionStatistic ?visit .
     BIND (day(?time)  as ?day)
     BIND (month(?time) as ?month)
@@ -191,7 +191,8 @@ dtype: int64
 ```sparql
 SELECT ?business COUNT(?visit) AS ?count_visits
 WHERE {
-    ?business schema:checkinTime ?visit .
+    ?blanknode schema:object ?business
+    ?blanknode schema:startTime ?visit .
 }
 GROUP BY ?business 
 ORDER BY DESC(COUNT(?visit))
@@ -264,7 +265,7 @@ SELECT (xsd:double(?countFriends) / xsd:double(?countUser) AS ?averageFriends)
 WHERE {
     {SELECT (COUNT(?user) AS ?countUser)
     WHERE {
-        ?user rdfs:Class schema:Person .
+        ?user rdf:type schema:Person .
         }}
     {SELECT (COUNT(?friend) AS ?countFriends)
     WHERE {
@@ -311,7 +312,7 @@ SELECT COUNT(DISTINCT(?user)) AS ?countUsers
 WHERE {
     SELECT ?user COUNT(?review) as ?numberOfReviews
     WHERE {
-        ?user rdfs:Class schema:Person .
+        ?user rdf:type schema:Person .
         ?review schema:author ?user .
     }
     GROUP BY ?user
@@ -335,7 +336,7 @@ reviews.groupby("user_id").size().reset_index(name="count").query("count == 10")
 ```sparql
 SELECT ?year ?month COUNT(?review) as ?countReviews
 WHERE {
-    ?review rdfs:Class schema:UserReview .
+    ?review rdf:type schema:UserReview .
     ?review schema:dateCreated ?date .
     BIND (month(?date) as ?month) .
     BIND (year(?date) as ?year) .
@@ -354,7 +355,7 @@ GROUP BY ?year ?month
 from datetime import datetime
 reviewers = 0
 # Open JSON file for reading
-with open(file=get_path("yelp_academic_dataset_review.json"), mode="r") as file:
+with open(file=os.path.join(read_dir, "yelp_academic_dataset_review.json"), mode="r") as file:
     # Iterate through each line in the file
     for line in file:
         # Parse line as a dictionary
@@ -372,7 +373,7 @@ reviewers
 ```sparql
 SELECT COUNT(DISTINCT ?p)
 WHERE {
-    ?s rdfs:Class schema:ParkingFacility.
+    ?s rdf:type schema:ParkingFacility.
     ?s ?p ?parking .
     MINUS {
         ?s rdfs:Class ?parking.
@@ -389,7 +390,7 @@ WHERE {
 # Initialize empty list to store business parking options
 BusinessParking = []
 # Open JSON file for reading
-with open(file=get_path("yelp_academic_dataset_business.json"), mode="r") as file:
+with open(file=os.path.join(read_dir, "yelp_academic_dataset_business.json"), mode="r") as file:
     # Iterate through each line in the file
     for line in file:
         # Parse line as a dictionary
@@ -445,7 +446,7 @@ from collections import Counter
 karaoke_values = []
 
 # Open the input file for reading
-with open(file=get_path("yelp_academic_dataset_business.json"), mode="r") as file:
+with open(file=os.path.join(read_dir, "yelp_academic_dataset_business.json"), mode="r") as file:
     # Iterate over each line in the file
     for line in file:
         # Load the JSON data from the line

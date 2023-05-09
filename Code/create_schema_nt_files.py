@@ -12,18 +12,17 @@ yelpcat = Namespace("https://purl.archive.org/purl/yckg/categories#")
 yelpvoc = Namespace("https://purl.archive.org/purl/yckg/vocabulary#")
 
 def create_schema_hierarchy_file(read_dir: str, write_dir: str):
-    """_summary_
-
+    """Creates the schema hierarchy file containing the full class hierarchy from Schema.org for the mapped categories.
     Args:
-        read_dir (str): _description_
-        write_dir (str): _description_
+        read_dir (str): The directory to read the data from.
+        write_dir (str): The directory to write the triple file to.
     """
 
     triple_file = gzip.open(os.path.join(write_dir, "schema_hierarchy.nt.gz"),
                             mode="at",
                             encoding="utf-8")
     
-    class_hierarchies = class_hierarchy(read_dir=read_dir)
+    class_hierarchies = class_hierarchy(read_dir=read_dir) 
     
     G = Graph()  
     for idx, row in class_hierarchies.iterrows():  # Adds type hierarchies to the graph
@@ -36,11 +35,10 @@ def create_schema_hierarchy_file(read_dir: str, write_dir: str):
 
 
 def create_schema_mappings_file(read_dir: str, write_dir: str):
-    """_summary_
-
+    """Creates the schema mappings file containing the mappings from Yelp categories to Schema.org types.
     Args:
-        read_dir (str): _description_
-        write_dir (str): _description_
+        read_dir (str): The directory to read the data from.
+        write_dir (str): The directory to write the triple file to.
     """
 
     triple_file = gzip.open(os.path.join(write_dir, "yelp_schema_mappings.nt.gz"),
@@ -49,7 +47,7 @@ def create_schema_mappings_file(read_dir: str, write_dir: str):
     
     schema_mapping = pd.read_csv(os.path.join(read_dir, "yelp_category_schema_mappings.csv"))
 
-    # the column contains a string representation of a list, so we need to convert it to a list.
+    # The column contains a string representation of a list, so we need to convert it to a list.
     schema_mapping['SchemaType'] = schema_mapping['SchemaType'].apply(lambda x: eval(x))
     schema_mapping = schema_mapping.explode('SchemaType')
     schema_mapping['YelpCategory'] = schema_mapping['YelpCategory'].apply(lambda x: yelpcat+x)
