@@ -142,10 +142,17 @@ def create_nt_file(file_name: str, read_dir: str, write_dir: str):
                             for obj in obj_lst:
                                 if _predicate == "date":
                                     obj = obj.replace(" ", "T")  # Cleans the date attribute
-
-                                G.add(triple=(subjectURI,
+                                
+                                if _predicate == "friends":
+                                    obj = yelpent + 'user_id/' + obj  
+                                    G.add(triple=(subjectURI,
                                               URIRef(predicate),
-                                              Literal(obj, datatype=object_type)))
+                                              URIRef(obj)))
+                                
+                                else:
+                                    G.add(triple=(subjectURI,
+                                                URIRef(predicate),
+                                                Literal(obj, datatype=object_type)))
                     
                                         
                     elif _predicate == "business_id":  # If we are dealing with a reivew, we add a link to the business

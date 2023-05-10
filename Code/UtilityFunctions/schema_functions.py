@@ -39,7 +39,7 @@ def get_schema_predicate(predicate, obj=None, file=None):
         case "date":
             return schema + "dateCreated", XSD.dateTime
         case "friends":
-            return schema + "knows", XSD.string
+            return schema + "knows", XSD.anyURI
         case "yelping_since":
             return schema + "dateCreated", XSD.dateTime
         case "business_id":
