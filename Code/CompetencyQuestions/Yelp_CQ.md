@@ -133,7 +133,7 @@ business['stars'].mean()
 ```sparql
 SELECT COUNT(DISTINCT(?s)) AS ?count_business
 WHERE {
-    ?s yelpont:locatedInCity 'Santa Barbara'^^xsd:string.
+    ?s yelpvoc:locatedInCity 'Santa Barbara'^^xsd:string.
 }
 ```
 
@@ -189,13 +189,14 @@ dtype: int64
 ## CQ 9: How many visits does the most visisted business have?
 **SPARQL Query**
 ```sparql
-SELECT ?business COUNT(?visit) AS ?count_visits
+SELECT ?business SUM(?visits) AS ?count_visits
 WHERE {
-    ?blanknode schema:object ?business
-    ?blanknode schema:startTime ?visit .
+    ?blanknode rdf:type schema:ArriveAction .
+    ?blanknode schema:object ?business .
+    ?blanknode schema:interactionStatistic ?visits .
 }
 GROUP BY ?business 
-ORDER BY DESC(COUNT(?visit))
+ORDER BY DESC(SUM(?visits))
 LIMIT 1
 ```
 
@@ -430,8 +431,8 @@ len(set(num_parkingopt))
 ```sparql
 SELECT COUNT(DISTINCT ?business) AS ?businessesWithKaraoke
 WHERE {
-    ?business yelpont:hasMusic ?blank .
-    ?blank yelpont:haskaraoke 1 .
+    ?business yelpvoc:hasMusic ?blank .
+    ?blank yelpvoc:haskaraoke 1 .
 }
 ```
 
