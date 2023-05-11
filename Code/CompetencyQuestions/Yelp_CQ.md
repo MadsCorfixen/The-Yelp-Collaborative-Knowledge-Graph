@@ -314,6 +314,7 @@ WHERE {
     SELECT ?user COUNT(?review) as ?numberOfReviews
     WHERE {
         ?user rdf:type schema:Person .
+        ?review rdf:type schema:UserReview .
         ?review schema:author ?user .
     }
     GROUP BY ?user
