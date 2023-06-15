@@ -69,7 +69,7 @@ yelpvoc:BusinessObjectProperty
 yelpvoc:compliment_count
   a owl:DataTypeProperty ; 
   rdfs:comment "Specifies compliment counts associated with a <Tip>."@en ; 
-  rdfs:domain yelpont:Tip ; 
+  rdfs:domain yelpvoc:Tip ; 
   rdfs:label "compliment_count"@en ; 
   rdfs:range xsd:Integer . 
 
@@ -305,28 +305,28 @@ yelpvoc:WiFi
    rdfs:range xsd:String . 
 
 yelpvoc:hasAmbience
-   a yelpont:BusinessObjectProperty, owl:FunctionalProperty ; 
+   a yelpvoc:BusinessObjectProperty, owl:FunctionalProperty ; 
    rdfs:comment "Specifies the ambience type of a <Business>."@en ; 
    rdfs:domain schema:LocalBusiness; 
    rdfs:label "hasAmbience"@en ; 
    rdfs:range schema:LocationFeatureSpecification . 
 
 yelpvoc:hasBestNights
-   a yelpont:BusinessObjectProperty, owl:FunctionalProperty ; 
+   a yelpvoc:BusinessObjectProperty, owl:FunctionalProperty ; 
    rdfs:comment "Specifies if a <Business> has some nights which are better than others."@en ; 
    rdfs:domain schema:LocalBusiness; 
    rdfs:label "hasBestnights"@en ; 
    rdfs:range schema:LocationFeatureSpecification . 
 
 yelpvoc:hasBusinessParking
-   a yelpont:BusinessObjectProperty, owl:FunctionalProperty ; 
+   a yelpvoc:BusinessObjectProperty, owl:FunctionalProperty ; 
    rdfs:comment "Specifies what parking options a <Business> offers."@en ; 
    rdfs:domain schema:LocalBusiness ; 
    rdfs:label "hasBusinessparking"@en ; 
    rdfs:range schema:ParkingFacility . 
 
 yelpvoc:hasDietaryRestrictions
-   a yelpont:BusinessObjectProperty, owl:FunctionalProperty; 
+   a yelpvoc:BusinessObjectProperty, owl:FunctionalProperty; 
    rdfs:comment "Specifies what dietary restrictions a <Business> accomodates."@en ; 
    rdfs:domain schema:LocalBusiness; 
    rdfs:label "hasDietaryrestrictions"@en ; 
@@ -340,21 +340,21 @@ yelpvoc:hasFriday
    rdfs:range xsd:String . 
 
 yelpvoc:hasGoodForMeal
-   a yelpont:BusinessObjectProperty, owl:FunctionalProperty ; 
+   a yelpvoc:BusinessObjectProperty, owl:FunctionalProperty ; 
    rdfs:comment "Specifies what meals a <Business> excels in."@en ; 
    rdfs:domain schema:LocalBusiness ; 
    rdfs:label "hasGoodformeal"@en ; 
    rdfs:range schema:FoodService . 
 
 yelpvoc:hasHairSpecializesIn
-   a yelpont:BusinessObjectProperty, owl:FunctionalProperty ; 
+   a yelpvoc:BusinessObjectProperty, owl:FunctionalProperty ; 
    rdfs:comment "Specifies what hair types a <Business> specialises in."@en ; 
    rdfs:domain schema:LocalBusiness ; 
    rdfs:label "hasHairspecializesin"@en ; 
    rdfs:range schema:LocationFeatureSpecification . 
 
 yelpvoc:hasHours
-   a yelpont:BusinessObjectProperty, owl:FunctionalProperty ; 
+   a yelpvoc:BusinessObjectProperty, owl:FunctionalProperty ; 
    rdfs:comment "Specifies what hours a <Business> is open."@en ; 
    rdfs:domain schema:LocalBusiness ; 
    rdfs:label "hasHours"@en ; 
@@ -368,7 +368,7 @@ yelpvoc:hasMonday
    rdfs:range xsd:String . 
 
 yelpvoc:hasMusic
-   a yelpont:BusinessObjectProperty, owl:FunctionalProperty ; 
+   a yelpvoc:BusinessObjectProperty, owl:FunctionalProperty ; 
    rdfs:comment "Specifies if a <Business> has certain types of music."@en ; 
    rdfs:domain schema:LocalBusiness; 
    rdfs:label "hasMusic"@en ; 
@@ -729,7 +729,7 @@ yelpvoc:hasvegan
    rdfs:comment "Specifies if a <Business> has vegan products."@en ; 
    rdfs:domain schema:LocalBusiness ; 
    rdfs:label "hasvegan"@en ; 
-   rdfs:range yelpont:X . 
+   rdfs:range xsd:Boolean . 
 
 yelpvoc:hasvegetarian
    a owl:DataTypeProperty, owl:FunctionalProperty ; 
