@@ -37,28 +37,28 @@
 yelpvoc:Tip
   a owl:Class ;
   rdfs:comment "A tip is a short description of a visit by a Yelp <User> pertaining to a Yelp <Business>. Is a shorter version of a Yelp <Review>."@en ;
-  rdfs:label "Tip"@en ;
+  rdfs:label "Tip"@en .
   
 yelpvoc:SchemaCategory
   rdf:type skos:Collection ;
   rdfs:comment "A Schema Category is a class assigned to objects which originates from the Schema ontology."@en ;
-  rdfs:label "Schema Category"@en ;
+  rdfs:label "Schema Category"@en .
   
 yelpvoc:YelpCategory
   a owl:Class ;
   rdfs:subClassOf schema:DefinedTerm ;
   rdfs:comment "A Yelp Category is a class assigned to the objects in the Yelp ontology."@en ;
-  rdfs:label "Yelp Category"@en ;
+  rdfs:label "Yelp Category"@en .
   
 yelpvoc:WikidataCategory
   rdf:type skos:Collection ;
   rdfs:subClassOf wd:Q35120 ;
   rdfs:comment "A Wikidata Category is a class assigned to the objects which origniates from the Wikidata ontology."@en ;
-  rdfs:label "Wikidata Category"@en ;
+  rdfs:label "Wikidata Category"@en .
   
 yelpvoc:BusinessObjectProperty
   rdfs:subPropertyOf owl:ObjectTypeProperty ;
-  rdfs:comment "Used to define predicates from Yelp <Business> to other objects such as the various Yelp <Services>."@en ;
+  rdfs:comment "Used to define predicates from Yelp <Business> to other objects such as the various Yelp <Services>."@en .
   
 ##############################################
 
