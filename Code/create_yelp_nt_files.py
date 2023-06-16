@@ -88,7 +88,8 @@ def create_nt_file(file_name: str, read_dir: str, write_dir: str):
                         del line['categories']  # No longer need this key/value pair.
                         
                         for category in categories:
-                            category = category.replace(' ', '_').replace("&", "_").replace("/", "_")  # Need to replace special characters as we use it as IRI.
+                            # Need to replace special characters as we use it as IRI.
+                            category = category.replace(' ', '_').replace("&", "_").replace("/", "_").replace("'", "_").replace("-", "_")  
 
                             G.add(triple=(
                                 subjectURI,
