@@ -89,7 +89,7 @@ def create_nt_file(file_name: str, read_dir: str, write_dir: str):
                         
                         for category in categories:
                             # Need to replace special characters as we use it as IRI.
-                            category = category.replace(' ', '_').replace("&", "_").replace("/", "_").replace("'", "_").replace("-", "_")  
+                            category = category.replace(' ', '_').replace("&", "_").replace("/", "_").replace("'", "_").replace("-", "_").replace("(", "_").replace(")", "_")
 
                             G.add(triple=(
                                 subjectURI,
