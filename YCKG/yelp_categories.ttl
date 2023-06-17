@@ -1,6 +1,6 @@
 @prefix yelpvoc: <https://purl.archive.org/purl/yckg/vocabulary#> .
 @prefix yelpcat: <https://purl.archive.org/purl/yckg/categories#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf_schema#> .
 
 yelpcat:taxi a yelpvoc:YelpCategory ; 
     rdfs:label "taxi is a category in Yelp used to describe a business." . 
@@ -68,11 +68,11 @@ yelpcat:alternative_medicine a yelpvoc:YelpCategory ;
 yelpcat:amateur_sports_team a yelpvoc:YelpCategory ; 
     rdfs:label "amateur_sports_team is a category in Yelp used to describe a business." . 
 
-yelpcat:american_new a yelpvoc:YelpCategory ; 
-    rdfs:label "american_new is a category in Yelp used to describe a business." . 
+yelpcat:american__new_ a yelpvoc:YelpCategory ; 
+    rdfs:label "american__new_ is a category in Yelp used to describe a business." . 
 
-yelpcat:american_traditional a yelpvoc:YelpCategory ; 
-    rdfs:label "american_traditional is a category in Yelp used to describe a business." . 
+yelpcat:american__traditional_ a yelpvoc:YelpCategory ; 
+    rdfs:label "american__traditional_ is a category in Yelp used to describe a business." . 
 
 yelpcat:amusement_park a yelpvoc:YelpCategory ; 
     rdfs:label "amusement_park is a category in Yelp used to describe a business." . 
@@ -377,8 +377,8 @@ yelpcat:cafe a yelpvoc:YelpCategory ;
 yelpcat:campground a yelpvoc:YelpCategory ; 
     rdfs:label "campground is a category in Yelp used to describe a business." . 
 
-yelpcat:canadian_new a yelpvoc:YelpCategory ; 
-    rdfs:label "canadian_new is a category in Yelp used to describe a business." . 
+yelpcat:canadian__new_ a yelpvoc:YelpCategory ; 
+    rdfs:label "canadian__new_ is a category in Yelp used to describe a business." . 
 
 yelpcat:candle_store a yelpvoc:YelpCategory ; 
     rdfs:label "candle_store is a category in Yelp used to describe a business." . 
@@ -449,8 +449,8 @@ yelpcat:caterer a yelpvoc:YelpCategory ;
 yelpcat:challenge_course a yelpvoc:YelpCategory ; 
     rdfs:label "challenge_course is a category in Yelp used to describe a business." . 
 
-yelpcat:check_cashing_pay-day_loan a yelpvoc:YelpCategory ; 
-    rdfs:label "check_cashing_pay-day_loan is a category in Yelp used to describe a business." . 
+yelpcat:check_cashing_pay_day_loan a yelpvoc:YelpCategory ; 
+    rdfs:label "check_cashing_pay_day_loan is a category in Yelp used to describe a business." . 
 
 yelpcat:cheese_shop a yelpvoc:YelpCategory ; 
     rdfs:label "cheese_shop is a category in Yelp used to describe a business." . 
@@ -470,11 +470,11 @@ yelpcat:child_care___day_care a yelpvoc:YelpCategory ;
 yelpcat:childbirth_education a yelpvoc:YelpCategory ; 
     rdfs:label "childbirth_education is a category in Yelp used to describe a business." . 
 
-yelpcat:childrens_clothing a yelpvoc:YelpCategory ; 
-    rdfs:label "childrens_clothing is a category in Yelp used to describe a business." . 
+yelpcat:children_s_clothing a yelpvoc:YelpCategory ; 
+    rdfs:label "children_s_clothing is a category in Yelp used to describe a business." . 
 
-yelpcat:childrens_museum a yelpvoc:YelpCategory ; 
-    rdfs:label "childrens_museum is a category in Yelp used to describe a business." . 
+yelpcat:children_s_museum a yelpvoc:YelpCategory ; 
+    rdfs:label "children_s_museum is a category in Yelp used to describe a business." . 
 
 yelpcat:chimney_sweep a yelpvoc:YelpCategory ; 
     rdfs:label "chimney_sweep is a category in Yelp used to describe a business." . 
@@ -530,8 +530,8 @@ yelpcat:commercial_truck_repair a yelpvoc:YelpCategory ;
 yelpcat:community_center a yelpvoc:YelpCategory ; 
     rdfs:label "community_center is a category in Yelp used to describe a business." . 
 
-yelpcat:community_service_non-profit a yelpvoc:YelpCategory ; 
-    rdfs:label "community_service_non-profit is a category in Yelp used to describe a business." . 
+yelpcat:community_service_non_profit a yelpvoc:YelpCategory ; 
+    rdfs:label "community_service_non_profit is a category in Yelp used to describe a business." . 
 
 yelpcat:computer a yelpvoc:YelpCategory ; 
     rdfs:label "computer is a category in Yelp used to describe a business." . 
@@ -683,8 +683,8 @@ yelpcat:divorce___family_law a yelpvoc:YelpCategory ;
 yelpcat:dj a yelpvoc:YelpCategory ; 
     rdfs:label "dj is a category in Yelp used to describe a business." . 
 
-yelpcat:do-it-yourself_food a yelpvoc:YelpCategory ; 
-    rdfs:label "do-it-yourself_food is a category in Yelp used to describe a business." . 
+yelpcat:do_it_yourself_food a yelpvoc:YelpCategory ; 
+    rdfs:label "do_it_yourself_food is a category in Yelp used to describe a business." . 
 
 yelpcat:doctor a yelpvoc:YelpCategory ; 
     rdfs:label "doctor is a category in Yelp used to describe a business." . 
@@ -992,8 +992,8 @@ yelpcat:glass___mirror a yelpvoc:YelpCategory ;
 yelpcat:glass_blowing a yelpvoc:YelpCategory ; 
     rdfs:label "glass_blowing is a category in Yelp used to describe a business." . 
 
-yelpcat:gluten-free a yelpvoc:YelpCategory ; 
-    rdfs:label "gluten-free is a category in Yelp used to describe a business." . 
+yelpcat:gluten_free a yelpvoc:YelpCategory ; 
+    rdfs:label "gluten_free is a category in Yelp used to describe a business." . 
 
 yelpcat:go_kart a yelpvoc:YelpCategory ; 
     rdfs:label "go_kart is a category in Yelp used to describe a business." . 
@@ -1478,11 +1478,11 @@ yelpcat:mediterranean a yelpvoc:YelpCategory ;
 yelpcat:memory_care a yelpvoc:YelpCategory ; 
     rdfs:label "memory_care is a category in Yelp used to describe a business." . 
 
-yelpcat:mens_clothing a yelpvoc:YelpCategory ; 
-    rdfs:label "mens_clothing is a category in Yelp used to describe a business." . 
+yelpcat:men_s_clothing a yelpvoc:YelpCategory ; 
+    rdfs:label "men_s_clothing is a category in Yelp used to describe a business." . 
 
-yelpcat:mens_hair_salon a yelpvoc:YelpCategory ; 
-    rdfs:label "mens_hair_salon is a category in Yelp used to describe a business." . 
+yelpcat:men_s_hair_salon a yelpvoc:YelpCategory ; 
+    rdfs:label "men_s_hair_salon is a category in Yelp used to describe a business." . 
 
 yelpcat:metal_fabricator a yelpvoc:YelpCategory ; 
     rdfs:label "metal_fabricator is a category in Yelp used to describe a business." . 
@@ -1682,8 +1682,8 @@ yelpcat:paddleboarding a yelpvoc:YelpCategory ;
 yelpcat:pain_management a yelpvoc:YelpCategory ; 
     rdfs:label "pain_management is a category in Yelp used to describe a business." . 
 
-yelpcat:paint-your-own_pottery a yelpvoc:YelpCategory ; 
-    rdfs:label "paint-your-own_pottery is a category in Yelp used to describe a business." . 
+yelpcat:paint_your_own_pottery a yelpvoc:YelpCategory ; 
+    rdfs:label "paint_your_own_pottery is a category in Yelp used to describe a business." . 
 
 yelpcat:paint___sip a yelpvoc:YelpCategory ; 
     rdfs:label "paint___sip is a category in Yelp used to describe a business." . 
@@ -2072,8 +2072,8 @@ yelpcat:scavenger_hunt a yelpvoc:YelpCategory ;
 yelpcat:screen_printing a yelpvoc:YelpCategory ; 
     rdfs:label "screen_printing is a category in Yelp used to describe a business." . 
 
-yelpcat:screen_printing_tshirt_printing a yelpvoc:YelpCategory ; 
-    rdfs:label "screen_printing_tshirt_printing is a category in Yelp used to describe a business." . 
+yelpcat:screen_printing_t_shirt_printing a yelpvoc:YelpCategory ; 
+    rdfs:label "screen_printing_t_shirt_printing is a category in Yelp used to describe a business." . 
 
 yelpcat:scuba_diving a yelpvoc:YelpCategory ; 
     rdfs:label "scuba_diving is a category in Yelp used to describe a business." . 
@@ -2090,8 +2090,8 @@ yelpcat:security_service a yelpvoc:YelpCategory ;
 yelpcat:security_system a yelpvoc:YelpCategory ; 
     rdfs:label "security_system is a category in Yelp used to describe a business." . 
 
-yelpcat:self-defense_class a yelpvoc:YelpCategory ; 
-    rdfs:label "self-defense_class is a category in Yelp used to describe a business." . 
+yelpcat:self_defense_class a yelpvoc:YelpCategory ; 
+    rdfs:label "self_defense_class is a category in Yelp used to describe a business." . 
 
 yelpcat:self_storage a yelpvoc:YelpCategory ; 
     rdfs:label "self_storage is a category in Yelp used to describe a business." . 
@@ -2336,8 +2336,8 @@ yelpcat:teppanyaki a yelpvoc:YelpCategory ;
 yelpcat:test_preparation a yelpvoc:YelpCategory ; 
     rdfs:label "test_preparation is a category in Yelp used to describe a business." . 
 
-yelpcat:tex-mex a yelpvoc:YelpCategory ; 
-    rdfs:label "tex-mex is a category in Yelp used to describe a business." . 
+yelpcat:tex_mex a yelpvoc:YelpCategory ; 
+    rdfs:label "tex_mex is a category in Yelp used to describe a business." . 
 
 yelpcat:thai a yelpvoc:YelpCategory ; 
     rdfs:label "thai is a category in Yelp used to describe a business." . 
@@ -2504,8 +2504,8 @@ yelpcat:vocational___technical_school a yelpvoc:YelpCategory ;
 yelpcat:waldorf_school a yelpvoc:YelpCategory ; 
     rdfs:label "waldorf_school is a category in Yelp used to describe a business." . 
 
-yelpcat:walk-in_clinic a yelpvoc:YelpCategory ; 
-    rdfs:label "walk-in_clinic is a category in Yelp used to describe a business." . 
+yelpcat:walk_in_clinic a yelpvoc:YelpCategory ; 
+    rdfs:label "walk_in_clinic is a category in Yelp used to describe a business." . 
 
 yelpcat:walking_tour a yelpvoc:YelpCategory ; 
     rdfs:label "walking_tour is a category in Yelp used to describe a business." . 
@@ -2594,8 +2594,8 @@ yelpcat:wine_tour a yelpvoc:YelpCategory ;
 yelpcat:winery a yelpvoc:YelpCategory ; 
     rdfs:label "winery is a category in Yelp used to describe a business." . 
 
-yelpcat:womens_clothing a yelpvoc:YelpCategory ; 
-    rdfs:label "womens_clothing is a category in Yelp used to describe a business." . 
+yelpcat:women_s_clothing a yelpvoc:YelpCategory ; 
+    rdfs:label "women_s_clothing is a category in Yelp used to describe a business." . 
 
 yelpcat:workers_compensation_law a yelpvoc:YelpCategory ; 
     rdfs:label "workers_compensation_law is a category in Yelp used to describe a business." . 
@@ -2789,8 +2789,8 @@ yelpcat:hospice a yelpvoc:YelpCategory ;
 yelpcat:hostel a yelpvoc:YelpCategory ; 
     rdfs:label "hostel is a category in Yelp used to describe a business." . 
 
-yelpcat:hydro-jetting a yelpvoc:YelpCategory ; 
-    rdfs:label "hydro-jetting is a category in Yelp used to describe a business." . 
+yelpcat:hydro_jetting a yelpvoc:YelpCategory ; 
+    rdfs:label "hydro_jetting is a category in Yelp used to describe a business." . 
 
 yelpcat:hydrotherapy a yelpvoc:YelpCategory ; 
     rdfs:label "hydrotherapy is a category in Yelp used to describe a business." . 
@@ -2846,8 +2846,8 @@ yelpcat:placenta_encapsulation a yelpvoc:YelpCategory ;
 yelpcat:polish a yelpvoc:YelpCategory ; 
     rdfs:label "polish is a category in Yelp used to describe a business." . 
 
-yelpcat:pop-up_restaurant a yelpvoc:YelpCategory ; 
-    rdfs:label "pop-up_restaurant is a category in Yelp used to describe a business." . 
+yelpcat:pop_up_restaurant a yelpvoc:YelpCategory ; 
+    rdfs:label "pop_up_restaurant is a category in Yelp used to describe a business." . 
 
 yelpcat:popcorn_shop a yelpvoc:YelpCategory ; 
     rdfs:label "popcorn_shop is a category in Yelp used to describe a business." . 
@@ -2960,8 +2960,8 @@ yelpcat:art_tour a yelpvoc:YelpCategory ;
 yelpcat:body_contouring a yelpvoc:YelpCategory ; 
     rdfs:label "body_contouring is a category in Yelp used to describe a business." . 
 
-yelpcat:brazilian_jiu-jitsu a yelpvoc:YelpCategory ; 
-    rdfs:label "brazilian_jiu-jitsu is a category in Yelp used to describe a business." . 
+yelpcat:brazilian_jiu_jitsu a yelpvoc:YelpCategory ; 
+    rdfs:label "brazilian_jiu_jitsu is a category in Yelp used to describe a business." . 
 
 yelpcat:cantonese a yelpvoc:YelpCategory ; 
     rdfs:label "cantonese is a category in Yelp used to describe a business." . 
@@ -3047,8 +3047,8 @@ yelpcat:coffeeshop a yelpvoc:YelpCategory ;
 yelpcat:crane_service a yelpvoc:YelpCategory ; 
     rdfs:label "crane_service is a category in Yelp used to describe a business." . 
 
-yelpcat:drive-thru_bar a yelpvoc:YelpCategory ; 
-    rdfs:label "drive-thru_bar is a category in Yelp used to describe a business." . 
+yelpcat:drive_thru_bar a yelpvoc:YelpCategory ; 
+    rdfs:label "drive_thru_bar is a category in Yelp used to describe a business." . 
 
 yelpcat:environmental_abatement a yelpvoc:YelpCategory ; 
     rdfs:label "environmental_abatement is a category in Yelp used to describe a business." . 
@@ -3110,8 +3110,8 @@ yelpcat:photography_class a yelpvoc:YelpCategory ;
 yelpcat:pole_dancing_class a yelpvoc:YelpCategory ; 
     rdfs:label "pole_dancing_class is a category in Yelp used to describe a business." . 
 
-yelpcat:pop-up_shop a yelpvoc:YelpCategory ; 
-    rdfs:label "pop-up_shop is a category in Yelp used to describe a business." . 
+yelpcat:pop_up_shop a yelpvoc:YelpCategory ; 
+    rdfs:label "pop_up_shop is a category in Yelp used to describe a business." . 
 
 yelpcat:powder_coating a yelpvoc:YelpCategory ; 
     rdfs:label "powder_coating is a category in Yelp used to describe a business." . 
@@ -3197,8 +3197,8 @@ yelpcat:crisis_pregnancy_center a yelpvoc:YelpCategory ;
 yelpcat:emergency_medicine a yelpvoc:YelpCategory ; 
     rdfs:label "emergency_medicine is a category in Yelp used to describe a business." . 
 
-yelpcat:faith-based_crisis_pregnancy_center a yelpvoc:YelpCategory ; 
-    rdfs:label "faith-based_crisis_pregnancy_center is a category in Yelp used to describe a business." . 
+yelpcat:faith_based_crisis_pregnancy_center a yelpvoc:YelpCategory ; 
+    rdfs:label "faith_based_crisis_pregnancy_center is a category in Yelp used to describe a business." . 
 
 yelpcat:firework a yelpvoc:YelpCategory ; 
     rdfs:label "firework is a category in Yelp used to describe a business." . 
@@ -3314,8 +3314,8 @@ yelpcat:dietitian a yelpvoc:YelpCategory ;
 yelpcat:dinner_theater a yelpvoc:YelpCategory ; 
     rdfs:label "dinner_theater is a category in Yelp used to describe a business." . 
 
-yelpcat:drive-in_theater a yelpvoc:YelpCategory ; 
-    rdfs:label "drive-in_theater is a category in Yelp used to describe a business." . 
+yelpcat:drive_in_theater a yelpvoc:YelpCategory ; 
+    rdfs:label "drive_in_theater is a category in Yelp used to describe a business." . 
 
 yelpcat:editorial_service a yelpvoc:YelpCategory ; 
     rdfs:label "editorial_service is a category in Yelp used to describe a business." . 
