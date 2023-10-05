@@ -1,3 +1,4 @@
+import os
 import argparse
 
 from Code.create_yelp_nt_files import create_nt_file, create_checkin_nt_file, create_tip_nt_file
@@ -18,6 +19,8 @@ read_dir = args.read_dir
 write_dir = args.write_dir
 include_schema = args.include_schema
 include_wikidata = args.include_wikidata
+
+if not os.path.exists(write_dir): os.makedirs(write_dir)  # Creates a folder that will contain the YCKG .nt.gz files
 
 files = [
         'yelp_academic_dataset_business.json',
