@@ -30,7 +30,7 @@ def create_nt_file(file_name: str, read_dir: str, write_dir: str):
     entity_name = file_name[22:-5]  # Either business, user, or review
     triple_file = gzip.open(filename=os.path.join(write_dir, f"yelp_{entity_name}.nt.gz"), mode="at", encoding="utf-8")
     file_path = os.path.join(read_dir, file_name)
-    if not os.path.exists("Errors"): os.makedirs("Errors")
+    if not os.path.exists("Errors"): os.makedirs("Errors")  # Creates a folder that will contain files with any triples that threw an error.
     
     # Lists for keeping track of errors
     none_triples = []
