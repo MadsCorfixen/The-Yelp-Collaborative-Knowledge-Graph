@@ -9,3 +9,4 @@ requests==2.28.1
 sentence_transformers==2.2.2
 shexer==2.0.1
 SPARQLWrapper==2.0.0
+pydantic==1.*
