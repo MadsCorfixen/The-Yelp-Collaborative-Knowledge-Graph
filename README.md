@@ -34,13 +34,13 @@ Furthermore, the following existing namespaces were also utilised:
 ```
 
 ## Knowledge Graph Generation
-This section is split into two ways to get the YCKG. You can either [download the KG from Zenodo](#zenodo), or [run the source code on your own machine](#directly-from-source). Furthermore, three versions of the KG are available, depending on preference. (1) a "clean" version of the KG that contains none of the mappings to Schema or Wikidata; (2) a version that contains the mappings to Schema, but not to Wikidata; (3) a version that contains both the mappings to Schema and to Wikidata.
+This section is split into two ways to get the YCKG. You can either [download a subset of the KG from Zenodo](#zenodo), or [run the source code on your own machine](#directly-from-source). Furthermore, three versions of the KG are available, depending on preference. (1) a "clean" version of the KG that contains none of the mappings to Schema or Wikidata; (2) a version that contains the mappings to Schema, but not to Wikidata; (3) a version that contains both the mappings to Schema and to Wikidata.
 
 ### Requirements
 This tool was implemented in Python 3.10.6. For packages used and their versions, see [requirements.txt](requirements.txt).
 
 ### Zenodo
-The dataset is uploaded on [https://zenodo.org/](https://zenodo.org/record/7878446). 
+A subset of the dataset is uploaded on [https://zenodo.org/](https://zenodo.org/record/7878446). 
 - Graph Data Triple Files
     - One sample file for each of the Yelp domains (Businesses, Users, Reviews, Tips and Checkins), containing 20 entities.
     - ```yelp_schema_mappings.nt.gz``` containing the mappings from Yelp categories to Schema things.
