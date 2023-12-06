@@ -61,7 +61,7 @@ A subset of the dataset is uploaded on [https://zenodo.org/](https://zenodo.org/
 ### Directly from Source
 To run the code yourself and obtain the YCKG, follow the following steps:
 1. Download the [Yelp Open Dataset](https://www.yelp.com/dataset) and put it into a folder of your choice
-2. Download the data from the Github folder [UtilityData](UtilityData) and also put it into the same folder as YOD.
+2. (Only necessary if the Schema and Wikidata mappings should be included) Download the data from the Github folder [Data](Data) and put it into the same folder as YOD.
    - ```schemaorg-current-https-types.csv```. This file contains the definition of all terms in, all sections of, the vocabulary, plus terms retired from the vocabulary as of Fall 2022. Is used to add the hierarchy of the mapped Schema types to the YCKG. For an up to date version, download from [Schema.org](https://schema.org/docs/developers.html).
    - ```yelp_category_schema_mappings.csv```. This file contains the 310 mappings from Yelp categories to Schema things. These mappings have been manually verified to be correct.
    - ```manually_split_categories.csv```. This file contains all Yelp categories containing either a & or /, and their manually split versions. The split versions have been used in the semantic mappings to Schema things.
@@ -76,3 +76,5 @@ The arguments specify the following:
 - ```--write_dir```: The directory in which the .nt files should be stored.
 - ```--include_schema```: If True also creates the .nt files to link YCKG to Schema.
 - ```--include_wikidata```: If True also creates the .nt files to link YCKG and Schema to Wikidata.
+
+4. This script generates all the YCKG files besides the graph metadata triple files, which are found in the GitHub folder [YCKG](YCKG). These are also a part of the YCKG.
