@@ -47,7 +47,7 @@ print(counter)
 ## CQ 3: How many businesses of type "Restaurants" have been reviwed?
 **SPARQL Query**:
 ```sparql
-SELECT DISTINCT (COUNT(?business) as ?businessCount)
+SELECT (COUNT(DISTINCT ?business) as ?businessCount)
 WHERE {
     ?business schema:keywords yelpcat:Restaurants .
     ?review schema:about ?business .
