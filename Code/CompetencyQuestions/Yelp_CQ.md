@@ -375,13 +375,11 @@ reviewers
 ## CQ 15: How many parking options can a business provide?
 **SPARQL Query**
 ```sparql
-SELECT COUNT(DISTINCT ?p)
+SELECT COUNT(DISTINCT ?parkingOption)
 WHERE {
-    ?s rdf:type schema:ParkingFacility.
-    ?s ?p ?parking .
-    MINUS {
-        ?s rdfs:Class ?parking.
-        }
+    ?s rdf:type schema:ParkingFacility .
+    ?s ?parkingOption ?parking .
+    FILTER (?parkingOption != rdf:type) .
 }
 ```
 
