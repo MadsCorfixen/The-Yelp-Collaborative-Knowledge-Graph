@@ -93,6 +93,7 @@ len(review_unique_business)
 ```sparql
 SELECT COUNT(DISTINCT(?business)) AS ?count
 WHERE {
+    ?business rdf:type schema:LocalBusiness .
     ?business schema:aggregateRating ?rating .
     FILTER (?rating > 4) .
 }
@@ -114,6 +115,7 @@ business[business['stars'] > 4]['stars'].count()
 ```sparql
 SELECT AVG(?rating) as ?averagerating
 WHERE {
+    ?business rdf:type schema:LocalBusiness .
     ?business schema:aggregateRating ?rating .
 }
 ```
